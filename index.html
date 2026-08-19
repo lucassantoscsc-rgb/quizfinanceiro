@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Diagnóstico Financeiro Gratuito — Descubra Para Onde Vai Seu Dinheiro</title>
+<meta name="description" content="Faça o diagnóstico financeiro em menos de 1 minuto e descubra exatamente por que seu dinheiro nunca sobra.">
+
+<!-- Preconnect + Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+
+<!-- ===================== TRACKING SNIPPETS (descomentar e inserir IDs) =====================
+<!-- Google tag (GA4) -->
+<!--
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXX');
+</script>
+-->
+<!-- Meta Pixel -->
+<!--
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', 'SEU_PIXEL_ID');
+fbq('track', 'PageView');
+</script>
+-->
+<!-- =========================================================================================== -->
+</head>
+<body>
+
+<div class="app" id="app">
+
+  <!-- Barra superior: só aparece durante o quiz -->
+  <header class="topbar" id="topbar" hidden>
+    <button class="back-btn" id="backBtn" type="button" aria-label="Voltar">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    <div class="progress-wrap">
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <span class="progress-label" id="progressLabel">1 de 6</span>
+    </div>
+  </header>
+
+  <main class="screen-container" id="screenContainer">
+
+    <!-- ====================== TELA 1: ABERTURA ====================== -->
+    <section class="screen screen--intro active" id="screen-intro">
+      <div class="intro-card">
+        <div class="intro-illustration" aria-hidden="true">
+          <svg viewBox="0 0 240 200" xmlns="http://www.w3.org/2000/svg" class="hero-svg">
+            <defs>
+              <linearGradient id="gradCard" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="var(--color-primary)"/>
+                <stop offset="100%" stop-color="var(--color-primary-dark)"/>
+              </linearGradient>
+            </defs>
+            <ellipse cx="120" cy="178" rx="90" ry="14" fill="var(--color-primary)" opacity="0.08"/>
+            <rect x="30" y="60" width="150" height="95" rx="16" fill="url(#gradCard)"/>
+            <rect x="30" y="60" width="150" height="30" rx="16" fill="#ffffff" opacity="0.12"/>
+            <circle cx="52" cy="75" r="7" fill="#ffffff" opacity="0.85"/>
+            <rect x="66" y="71" width="46" height="8" rx="4" fill="#ffffff" opacity="0.7"/>
+            <polyline points="46,140 78,118 100,132 132,98 164,108" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="0.95"/>
+            <circle cx="164" cy="108" r="6" fill="var(--color-accent)"/>
+            <circle cx="132" cy="98" r="5" fill="#ffffff"/>
+            <circle cx="100" cy="132" r="5" fill="#ffffff"/>
+            <circle cx="78" cy="118" r="5" fill="#ffffff"/>
+            <g>
+              <circle cx="198" cy="50" r="22" fill="var(--color-accent)"/>
+              <text x="198" y="58" text-anchor="middle" font-family="Poppins, sans-serif" font-size="20" font-weight="700" fill="#ffffff">R$</text>
+            </g>
+            <circle cx="26" cy="40" r="10" fill="var(--color-primary-light)" opacity="0.5"/>
+            <circle cx="205" cy="150" r="7" fill="var(--color-primary-light)" opacity="0.6"/>
+          </svg>
+        </div>
+
+        <span class="badge-time">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 7V12L15 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          Leva menos de 1 minuto · 6 perguntas rápidas
+        </span>
+
+        <h1 class="intro-headline">
+          Descubra <span class="hl">por que seu dinheiro nunca sobra</span> — mesmo ganhando o suficiente
+        </h1>
+
+        <p class="intro-subtext">
+          Responda 6 perguntas rápidas e receba um diagnóstico financeiro personalizado, feito para mostrar exatamente onde o seu dinheiro está escapando.
+        </p>
+
+        <button class="btn btn-primary btn-pulse btn-large" id="startBtn" type="button">
+          Começar meu diagnóstico grátis
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+
+        <div class="social-proof">
+          <div class="avatars" aria-hidden="true">
+            <span class="avatar">👩</span><span class="avatar">👨</span><span class="avatar">👩🏽</span><span class="avatar">👨🏾</span>
+          </div>
+          <p><strong>+12.400 pessoas</strong> já fizeram esse diagnóstico</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================== TELA 2: QUIZ (perguntas geradas via JS) ====================== -->
+    <section class="screen screen--quiz" id="screen-quiz">
+      <div class="question-slide" id="questionSlide"></div>
+    </section>
+
+    <!-- ====================== TELA 3: CAPTURA DE LEAD ====================== -->
+    <section class="screen screen--lead" id="screen-lead">
+      <div class="lead-card">
+        <span class="lead-icon" aria-hidden="true">📋</span>
+        <h2 class="lead-headline">Quase lá! Vamos gerar seu diagnóstico personalizado</h2>
+        <p class="lead-subtext">Com base nas suas respostas, vamos montar uma análise só sua. Pra onde enviamos o resultado?</p>
+
+        <form class="lead-form" id="leadForm" novalidate>
+          <div class="field">
+            <label for="leadName">Seu nome</label>
+            <input type="text" id="leadName" name="name" placeholder="Como podemos te chamar?" autocomplete="given-name" required>
+            <span class="field-error" id="nameError"></span>
+          </div>
+          <div class="field">
+            <label for="leadEmail">Seu melhor e-mail</label>
+            <input type="email" id="leadEmail" name="email" placeholder="voce@email.com" autocomplete="email" inputmode="email" required>
+            <span class="field-error" id="emailError"></span>
+          </div>
+
+          <button class="btn btn-primary btn-large" id="leadSubmitBtn" type="submit" disabled>
+            Gerar meu diagnóstico
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </form>
+
+        <p class="lead-privacy">🔒 Seus dados estão seguros. Sem spam, prometido.</p>
+      </div>
+    </section>
+
+    <!-- ====================== TELA 4: LOADING ====================== -->
+    <section class="screen screen--loading" id="screen-loading">
+      <div class="loading-card">
+        <div class="spinner" aria-hidden="true"></div>
+        <p class="loading-text" id="loadingText">Analisando suas respostas...</p>
+        <div class="loading-progress">
+          <div class="loading-progress-fill" id="loadingProgressFill"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================== TELA 5: RESULTADO (dinâmico) ====================== -->
+    <section class="screen screen--result" id="screen-result">
+      <div class="result-wrap" id="resultWrap">
+        <!-- preenchido via JS -->
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

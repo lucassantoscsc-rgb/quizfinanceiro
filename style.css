@@ -360,72 +360,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 .option-btn:disabled { cursor: default; }
 
 /* =========================================================
-   TELA 3 — LEAD CAPTURE
-   ========================================================= */
-.screen--lead { justify-content: center; }
-
-.lead-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 14px;
-  animation: fadeUp 0.5s ease both;
-}
-
-.lead-icon { font-size: 40px; }
-
-.lead-headline {
-  font-size: clamp(22px, 5.4vw, 27px);
-  font-weight: 700;
-}
-.lead-subtext {
-  font-size: 15.5px;
-  color: var(--text-secondary);
-  max-width: 40ch;
-}
-
-.lead-form {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  margin-top: 8px;
-  text-align: left;
-}
-
-.field { display: flex; flex-direction: column; gap: 6px; }
-.field label { font-size: 13.5px; font-weight: 600; color: var(--text-secondary); }
-.field input {
-  width: 100%;
-  padding: 15px 16px;
-  border-radius: var(--radius-md);
-  border: 1.5px solid var(--border);
-  background: var(--surface);
-  font-size: 15.5px;
-  color: var(--text-primary);
-  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
-}
-.field input:focus {
-  outline: none;
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 4px var(--color-primary-bg);
-}
-.field input.is-invalid { border-color: var(--color-danger); }
-.field-error {
-  font-size: 12.5px;
-  color: var(--color-danger);
-  min-height: 15px;
-}
-
-.lead-privacy {
-  font-size: 12.5px;
-  color: var(--text-muted);
-  margin-top: 2px;
-}
-
-/* =========================================================
-   TELA 4 — LOADING
+   TELA 3 — LOADING
    ========================================================= */
 .screen--loading { justify-content: center; align-items: center; }
 
@@ -471,7 +406,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 }
 
 /* =========================================================
-   TELA 5 — RESULTADO
+   TELA 4 — RESULTADO
    ========================================================= */
 .screen--result { padding-top: 20px; }
 

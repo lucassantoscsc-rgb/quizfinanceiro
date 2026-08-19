@@ -131,39 +131,23 @@
   var RESULT_COPY = {
     disorganization: {
       tag: 'Diagnóstico: Desorganização financeira',
-      headline: function (name) {
-        return name + ', seu dinheiro não some por acaso — <span class="hl">ele está desorganizado</span>.';
-      },
-      body: function () {
-        return 'Você não precisa de mais disciplina, precisa de uma <strong>estrutura simples</strong> que te mostre, de forma visual, para onde cada real está indo. Sem isso, é praticamente impossível ter controle — não importa o quanto você se esforce.';
-      }
+      headline: 'Seu dinheiro não some por acaso — <span class="hl">ele está desorganizado</span>.',
+      body: 'Você não precisa de mais disciplina, precisa de uma <strong>estrutura simples</strong> que te mostre, de forma visual, para onde cada real está indo. Sem isso, é praticamente impossível ter controle — não importa o quanto você se esforce.'
     },
     no_tool: {
       tag: 'Diagnóstico: Ferramenta errada',
-      headline: function (name) {
-        return name + ', o problema não é falta de esforço — <span class="hl">é não ter a ferramenta certa</span>.';
-      },
-      body: function () {
-        return 'Apps complicados, planilhas confusas ou anotações soltas no papel não funcionam a longo prazo. Você precisa de algo <strong>simples de usar todos os dias</strong>, que se encaixe na sua rotina em vez de virar mais uma tarefa chata.';
-      }
+      headline: 'O problema não é falta de esforço — <span class="hl">é não ter a ferramenta certa</span>.',
+      body: 'Apps complicados, planilhas confusas ou anotações soltas no papel não funcionam a longo prazo. Você precisa de algo <strong>simples de usar todos os dias</strong>, que se encaixe na sua rotina em vez de virar mais uma tarefa chata.'
     },
     forgetfulness: {
       tag: 'Diagnóstico: Falta de acompanhamento',
-      headline: function (name) {
-        return name + ', não é falta de vontade — <span class="hl">é falta de um lembrete simples</span>.';
-      },
-      body: function () {
-        return 'Anotar uma vez não resolve. O segredo está em ter um sistema fácil o bastante para <strong>virar hábito em poucos minutos por semana</strong>, sem esforço mental extra pra lembrar de atualizar.';
-      }
+      headline: 'Não é falta de vontade — <span class="hl">é falta de um lembrete simples</span>.',
+      body: 'Anotar uma vez não resolve. O segredo está em ter um sistema fácil o bastante para <strong>virar hábito em poucos minutos por semana</strong>, sem esforço mental extra pra lembrar de atualizar.'
     },
     complexity: {
       tag: 'Diagnóstico: Excesso de complexidade',
-      headline: function (name) {
-        return name + ', você não precisa de um sistema complicado — <span class="hl">precisa de um simples</span>.';
-      },
-      body: function () {
-        return 'Categorias infinitas, planilhas cheias de fórmulas e apps com 50 telas só afastam quem só quer entender o básico: quanto entra, quanto sai e quanto sobra. <strong>Simplicidade é o que gera constância.</strong>';
-      }
+      headline: 'Você não precisa de um sistema complicado — <span class="hl">precisa de um simples</span>.',
+      body: 'Categorias infinitas, planilhas cheias de fórmulas e apps com 50 telas só afastam quem só quer entender o básico: quanto entra, quanto sai e quanto sobra. <strong>Simplicidade é o que gera constância.</strong>'
     }
   };
 
@@ -173,7 +157,6 @@
   var state = {
     currentQuestion: 0,
     answers: {},
-    lead: { name: '', email: '' },
     utm: getUTMParams()
   };
 
@@ -188,20 +171,12 @@
   var screens = {
     intro: document.getElementById('screen-intro'),
     quiz: document.getElementById('screen-quiz'),
-    lead: document.getElementById('screen-lead'),
     loading: document.getElementById('screen-loading'),
     result: document.getElementById('screen-result')
   };
 
   var startBtn = document.getElementById('startBtn');
   var questionSlide = document.getElementById('questionSlide');
-
-  var leadForm = document.getElementById('leadForm');
-  var leadNameInput = document.getElementById('leadName');
-  var leadEmailInput = document.getElementById('leadEmail');
-  var leadSubmitBtn = document.getElementById('leadSubmitBtn');
-  var nameError = document.getElementById('nameError');
-  var emailError = document.getElementById('emailError');
 
   var loadingText = document.getElementById('loadingText');
   var loadingProgressFill = document.getElementById('loadingProgressFill');
@@ -332,12 +307,11 @@
       state.currentQuestion = index + 1;
       renderQuestion(state.currentQuestion, 'fwd');
     } else {
-      // última pergunta respondida -> progresso 100% -> tela de lead
+      // última pergunta respondida -> progresso 100% -> loading -> resultado
       progressFill.style.width = '100%';
       progressLabel.textContent = QUESTIONS.length + ' de ' + QUESTIONS.length;
       window.setTimeout(function () {
-        showScreen('lead');
-        leadNameInput.focus();
+        startLoadingSequence();
       }, 200);
     }
   }
@@ -352,47 +326,7 @@
   });
 
   /* =========================================================
-     TELA 3 — CAPTURA DE LEAD
-     ========================================================= */
-  var EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-  function validateLead() {
-    var name = leadNameInput.value.trim();
-    var email = leadEmailInput.value.trim();
-
-    var nameValid = name.length >= 2;
-    var emailValid = EMAIL_REGEX.test(email);
-
-    nameError.textContent = (!nameValid && name.length > 0) ? 'Digite seu nome completo.' : '';
-    emailError.textContent = (!emailValid && email.length > 0) ? 'Digite um e-mail válido.' : '';
-
-    leadNameInput.classList.toggle('is-invalid', !nameValid && name.length > 0);
-    leadEmailInput.classList.toggle('is-invalid', !emailValid && email.length > 0);
-
-    var allValid = nameValid && emailValid;
-    leadSubmitBtn.disabled = !allValid;
-    return allValid;
-  }
-
-  leadNameInput.addEventListener('input', validateLead);
-  leadEmailInput.addEventListener('input', validateLead);
-
-  leadForm.addEventListener('submit', function (e) {
-    e.preventDefault();
-    if (!validateLead()) return;
-
-    state.lead.name = leadNameInput.value.trim();
-    state.lead.email = leadEmailInput.value.trim();
-
-    // TODO: envie o lead para seu serviço de e-mail marketing / webhook aqui
-    // (mantido apenas em memória — nunca em localStorage/sessionStorage)
-    trackEvent('lead_captured', { has_name: true, has_email: true });
-
-    startLoadingSequence();
-  });
-
-  /* =========================================================
-     TELA 4 — LOADING
+     TELA 3 — LOADING
      ========================================================= */
   var LOADING_MESSAGES = [
     'Analisando suas respostas...',
@@ -425,16 +359,9 @@
   }
 
   /* =========================================================
-     TELA 5 — RESULTADO DINÂMICO
+     TELA 4 — RESULTADO DINÂMICO
      ========================================================= */
-  function escapeHTML(str) {
-    var div = document.createElement('div');
-    div.textContent = str;
-    return div.innerHTML;
-  }
-
   function renderResult() {
-    var name = escapeHTML(state.lead.name.split(' ')[0] || 'Você');
     var objection = state.answers.objection || 'disorganization';
     var leak = state.answers.leak;
     var urgency = state.answers.urgency;
@@ -448,11 +375,11 @@
     resultWrap.innerHTML =
       '<div class="result-header">' +
         '<span class="result-tag">' + copy.tag + '</span>' +
-        '<h1 class="result-headline">' + copy.headline(name) + '</h1>' +
+        '<h1 class="result-headline">' + copy.headline + '</h1>' +
       '</div>' +
 
       '<div class="result-card">' +
-        '<p>' + copy.body() + '</p>' +
+        '<p>' + copy.body + '</p>' +
         '<span class="leak-chip">⚠️ Seu maior ponto de atenção: ' + leakLabel + '</span>' +
         '<p>' + urgencyLeadIn + ' a <strong>Planilha de Organização Financeira</strong> foi criada pra te dar clareza total sobre suas contas em minutos, sem complicação.</p>' +
       '</div>' +

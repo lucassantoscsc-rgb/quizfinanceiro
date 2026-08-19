@@ -130,36 +130,7 @@ fbq('track', 'PageView');
       <div class="question-slide" id="questionSlide"></div>
     </section>
 
-    <!-- ====================== TELA 3: CAPTURA DE LEAD ====================== -->
-    <section class="screen screen--lead" id="screen-lead">
-      <div class="lead-card">
-        <span class="lead-icon" aria-hidden="true">📋</span>
-        <h2 class="lead-headline">Quase lá! Vamos gerar seu diagnóstico personalizado</h2>
-        <p class="lead-subtext">Com base nas suas respostas, vamos montar uma análise só sua. Pra onde enviamos o resultado?</p>
-
-        <form class="lead-form" id="leadForm" novalidate>
-          <div class="field">
-            <label for="leadName">Seu nome</label>
-            <input type="text" id="leadName" name="name" placeholder="Como podemos te chamar?" autocomplete="given-name" required>
-            <span class="field-error" id="nameError"></span>
-          </div>
-          <div class="field">
-            <label for="leadEmail">Seu melhor e-mail</label>
-            <input type="email" id="leadEmail" name="email" placeholder="voce@email.com" autocomplete="email" inputmode="email" required>
-            <span class="field-error" id="emailError"></span>
-          </div>
-
-          <button class="btn btn-primary btn-large" id="leadSubmitBtn" type="submit" disabled>
-            Gerar meu diagnóstico
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-        </form>
-
-        <p class="lead-privacy">🔒 Seus dados estão seguros. Sem spam, prometido.</p>
-      </div>
-    </section>
-
-    <!-- ====================== TELA 4: LOADING ====================== -->
+    <!-- ====================== TELA 3: LOADING ====================== -->
     <section class="screen screen--loading" id="screen-loading">
       <div class="loading-card">
         <div class="spinner" aria-hidden="true"></div>
@@ -170,7 +141,7 @@ fbq('track', 'PageView');
       </div>
     </section>
 
-    <!-- ====================== TELA 5: RESULTADO (dinâmico) ====================== -->
+    <!-- ====================== TELA 4: RESULTADO (dinâmico) ====================== -->
     <section class="screen screen--result" id="screen-result">
       <div class="result-wrap" id="resultWrap">
         <!-- preenchido via JS -->

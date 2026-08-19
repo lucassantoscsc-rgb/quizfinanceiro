@@ -246,6 +246,9 @@ ul { margin: 0; padding: 0; list-style: none; }
   color: var(--color-primary);
   background: linear-gradient(180deg, transparent 62%, var(--color-primary-bg) 62%);
 }
+.intro-headline .hl-accent {
+  color: var(--color-accent-dark);
+}
 
 .intro-subtext {
   font-size: 16px;

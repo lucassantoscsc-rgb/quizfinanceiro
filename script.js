@@ -4,7 +4,7 @@
   /* =========================================================
      CONFIG — troque pelo link real da Cakto
      ========================================================= */
-  var CHECKOUT_URL_BASE = 'https://pay.cakto.com.br/SEU-LINK-AQUI';
+  var CHECKOUT_URL_BASE = 'https://pay.cakto.com.br/o7zxmb3_786993';
 
   /* =========================================================
      TRACKING — pronto para GA4 / Meta Pixel

@@ -14,8 +14,16 @@
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push(Object.assign({ event: eventName }, payload));
 
-    // if (typeof gtag === 'function') gtag('event', eventName, payload);
-    // if (typeof fbq === 'function') fbq('trackCustom', eventName, payload);
+    if (typeof gtag === 'function') gtag('event', eventName, payload);
+
+    if (typeof fbq === 'function') {
+      if (eventName === 'cta_click') {
+        // Evento padrão do Meta para quem clicou rumo ao checkout — permite otimizar campanhas por esse objetivo
+        fbq('track', 'InitiateCheckout', payload);
+      } else {
+        fbq('trackCustom', eventName, payload);
+      }
+    }
   }
 
   /* =========================================================

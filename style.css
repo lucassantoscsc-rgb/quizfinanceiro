@@ -192,6 +192,7 @@ ul { margin: 0; padding: 0; list-style: none; }
   border-radius: var(--radius-pill);
   font-family: var(--font-heading);
   font-weight: 600;
+  text-decoration: none;
   cursor: pointer;
   transition: transform var(--transition-fast), box-shadow var(--transition-fast), opacity var(--transition-fast), background var(--transition-fast);
   white-space: nowrap;

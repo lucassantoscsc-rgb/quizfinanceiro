@@ -13,6 +13,36 @@
 <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
 
 <link rel="stylesheet" href="style.css">
+<style>
+  /* Estilos específicos desta página de retenção */
+  .urgent-tag {
+    background: var(--color-accent-bg);
+    color: var(--color-accent-dark);
+  }
+  .offer-price-row-triple {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .offer-price-old2 {
+    font-size: 15px;
+    text-decoration: line-through;
+    opacity: 0.65;
+  }
+  .offer-badge {
+    align-self: flex-start;
+    background: var(--color-accent);
+    color: #fff;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 12px;
+    padding: 5px 12px;
+    border-radius: var(--radius-pill);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+</style>
 
 <!-- Meta Pixel -->
 <script>
@@ -38,20 +68,22 @@ fbq('trackCustom', 'checkout_back_redirect');
       <div class="result-wrap">
 
         <div class="result-header">
-          <span class="result-tag">Espera 👋</span>
-          <h1 class="result-headline">Você já deu o passo mais difícil — <span class="hl">não pare agora</span>.</h1>
+          <span class="result-tag urgent-tag">🔥 Oferta exclusiva — só nesta tela</span>
+          <h1 class="result-headline">Espera! Essa condição <span class="hl">não vai aparecer de novo</span>.</h1>
         </div>
 
         <div class="result-card">
-          <p>Você chegou até aqui porque quer parar de perder o controle das suas finanças. A <strong>Planilha de Organização Financeira</strong> foi feita pra isso: simples, visual, e pronta pra usar hoje mesmo.</p>
+          <p>Só porque você tentou sair, vamos liberar a <strong>Planilha de Organização Financeira</strong> por um preço que não oferecemos em mais nenhum lugar. É válido só agora, só aqui.</p>
           <p>Se não fizer sentido pra você depois de testar, é só pedir reembolso dentro de 7 dias — sem perguntas.</p>
         </div>
 
         <div class="offer-card">
+          <span class="offer-badge">Só nesta página</span>
           <span class="offer-title">Planilha de Organização Financeira</span>
-          <div class="offer-price-row">
-            <span class="offer-price-old">De R$47</span>
-            <span class="offer-price-new">R$17</span>
+          <div class="offer-price-row-triple">
+            <span class="offer-price-old2">De R$47</span>
+            <span class="offer-price-old2">R$17</span>
+            <span class="offer-price-new">R$10</span>
           </div>
           <ul class="offer-includes">
             <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 13L9.5 17.5L19 7" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Planilha completa e pronta pra usar</li>
@@ -63,11 +95,12 @@ fbq('trackCustom', 'checkout_back_redirect');
         </div>
 
         <div class="final-cta-wrap">
-          <a class="btn btn-primary btn-large btn-pulse" id="backCtaBtn" href="https://pay.cakto.com.br/o7zxmb3_786993">
-            Concluir minha compra
+          <!-- TODO: trocar pelo link real do checkout com o cupom de R$10 aplicado -->
+          <a class="btn btn-primary btn-large btn-pulse" id="backCtaBtn" href="https://pay.cakto.com.br/SEU-LINK-COM-CUPOM-R10-AQUI">
+            Quero garantir por R$10
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
-          <span class="final-cta-note">Acesso imediato após a confirmação · Pagamento seguro</span>
+          <span class="final-cta-note">Essa oferta é exclusiva desta página · Acesso imediato · Pagamento seguro</span>
         </div>
 
       </div>

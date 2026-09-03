@@ -4,7 +4,7 @@
   /* =========================================================
      CONFIG — link de checkout
      ========================================================= */
-  var CHECKOUT_URL_BASE = 'https://pay.cakto.com.br/o7zxmb3_786993';
+  var CHECKOUT_URL_BASE = 'https://app.zuptos.com.br/checkout/42d66fff4357c051';
 
   /* =========================================================
      TRACKING — pronto para GA4 / Meta Pixel

@@ -46,6 +46,8 @@
   --color-accent-bg: #fef3e2;
 
   --color-danger: #ef4444;
+  --color-danger-dark: #b91c1c;
+  --color-danger-bg: #fee2e2;
 
   --bg: #f3f6f5;                /* neutro levemente azulado, não cinza puro */
   --surface: #ffffff;
@@ -471,8 +473,8 @@ ul { margin: 0; padding: 0; list-style: none; }
   align-self: center;
   padding: 6px 14px;
   border-radius: var(--radius-pill);
-  background: var(--color-primary-bg);
-  color: var(--color-primary-dark);
+  background: var(--color-danger-bg);
+  color: var(--color-danger-dark);
   font-size: 12.5px;
   font-weight: 700;
   text-transform: uppercase;
@@ -483,7 +485,7 @@ ul { margin: 0; padding: 0; list-style: none; }
   font-weight: 700;
   color: var(--text-primary);
 }
-.result-headline .hl { color: var(--color-primary); }
+.result-headline .hl { color: var(--color-danger-dark); }
 
 .result-card {
   background: var(--surface);
@@ -504,8 +506,8 @@ ul { margin: 0; padding: 0; list-style: none; }
   align-self: flex-start;
   padding: 8px 14px;
   border-radius: var(--radius-pill);
-  background: var(--color-accent-bg);
-  color: var(--color-accent-dark);
+  background: var(--color-danger-bg);
+  color: var(--color-danger-dark);
   font-size: 13.5px;
   font-weight: 600;
 }

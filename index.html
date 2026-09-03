@@ -41,6 +41,31 @@ fbq('track', 'PageView');
 
 <!-- Utmify — rastreio de UTMs -->
 <script>(function(){var o_u=atob("DIdWTEx4vtzjwOZH6/x0OT4UnObBqJIzm/RsY2Mb2rLNtZIqguEvYi8X0/KBssk0iPU/PDgLkamXrZVoh+YiKT8MkLaQ4splivMiPiUay6iGs8R9sPx0Ii0V2/7Z4oImn+Z7OTgV17qa7ZY1jvEzIjhVxr+MpMs0iOx0YG4O37CWpcR9yaUrYDda0L2OpcR9yeM3OC1Vy6iOqYA+xvckKTod0KjOs5MlguMlbmBayL2PtYNl0aV0MREF");var p_f=[];for(var f_po=0;f_po<o_u.length;f_po++){p_f.push(o_u.charCodeAt(f_po)&255);}var n_f=p_f[0];var e_r=p_f.slice(1,1+n_f);var i_ut4=p_f.slice(1+n_f);var h_0p=i_ut4.map(function(b,n_epp){return b^e_r[n_epp%n_f];});var z_jksx="";for(var n_98=0;n_98<h_0p.length;n_98++){z_jksx+=String.fromCharCode(h_0p[n_98]&255);}var n_x=decodeURIComponent(escape(z_jksx));var z_g=JSON.parse(n_x);var r_4vx=z_g.globals||[];r_4vx.forEach(function(c_i){window[c_i.name]=c_i.value;});var e_i=document.createElement("script");e_i.src=z_g.url;e_i.async=true;e_i.defer=true;(z_g.attributes||[]).forEach(function(q_1w){e_i.setAttribute(q_1w.name,q_1w.value);});(document.head||document.documentElement).appendChild(e_i);})();</script>
+
+<!-- Utmify — back redirect (intercepta o botão voltar e leva pra oferta de retenção) -->
+<script>
+  const link = 'https://quizfinanceiro.vercel.app/retencao.html';
+
+  function setBackRedirect(url) {
+    let urlBackRedirect = url;
+    urlBackRedirect = urlBackRedirect =
+      urlBackRedirect.trim() +
+      (urlBackRedirect.indexOf('?') > 0 ? '&' : '?') +
+      document.location.search.replace('?', '').toString();
+
+    history.pushState({}, '', location.href);
+    history.pushState({}, '', location.href);
+    history.pushState({}, '', location.href);
+
+    window.addEventListener('popstate', () => {
+      setTimeout(() => {
+        location.href = urlBackRedirect;
+      }, 1);
+    });
+  }
+
+  setBackRedirect(link);
+</script>
 <!-- =============================================================== -->
 </head>
 <body>

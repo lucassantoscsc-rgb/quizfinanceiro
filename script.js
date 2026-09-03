@@ -414,7 +414,6 @@
           '<li>' + checkIcon() + ' Planilha completa e pronta pra usar</li>' +
           '<li>' + checkIcon() + ' Categorias de gastos automáticas</li>' +
           '<li>' + checkIcon() + ' Painel visual de para onde vai seu dinheiro</li>' +
-          '<li>' + checkIcon() + ' Bônus: quitação de dívidas por R$7,90 no checkout</li>' +
         '</ul>' +
         '<div class="guarantee-strip">🛡️ Garantia incondicional de 7 dias — ou seu dinheiro de volta</div>' +
       '</div>' +

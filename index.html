@@ -44,27 +44,28 @@ fbq('track', 'PageView');
 
 <!-- Utmify — back redirect (intercepta o botão voltar e leva pra oferta de retenção) -->
 <script>
-  const link = 'https://quizfinanceiro.vercel.app/oferta-exclusiva.html';
+(function () {
+  var link = 'https://quizfinanceiro.vercel.app/oferta-exclusiva.html';
 
   function setBackRedirect(url) {
-    let urlBackRedirect = url;
-    urlBackRedirect = urlBackRedirect =
-      urlBackRedirect.trim() +
-      (urlBackRedirect.indexOf('?') > 0 ? '&' : '?') +
-      document.location.search.replace('?', '').toString();
+    var urlBackRedirect =
+      url.trim() +
+      (url.indexOf('?') > 0 ? '&' : '?') +
+      document.location.search.replace('?', '');
 
     history.pushState({}, '', location.href);
     history.pushState({}, '', location.href);
     history.pushState({}, '', location.href);
 
-    window.addEventListener('popstate', () => {
-      setTimeout(() => {
+    window.addEventListener('popstate', function () {
+      setTimeout(function () {
         location.href = urlBackRedirect;
       }, 1);
     });
   }
 
   setBackRedirect(link);
+})();
 </script>
 <!-- =============================================================== -->
 </head>
@@ -93,7 +94,7 @@ fbq('track', 'PageView');
     <section class="screen screen--intro active" id="screen-intro">
       <div class="intro-card">
         <div class="intro-illustration" aria-hidden="true">
-          <img src="assets/hero-stress.jpg" alt="" class="hero-photo" width="800" height="800" fetchpriority="high">
+          <img src="assets/hero-stress.jpg" alt="" class="hero-photo" width="560" height="560" fetchpriority="high">
         </div>
 
         <span class="badge-time">

@@ -285,11 +285,12 @@
           '<ul class="offer-includes">' +
             '<li>' + checkIcon() + ' Incluso nos R$17: a Planilha de Organização Financeira (produto digital)</li>' +
             '<li>' + checkIcon() + ' Incluso: o tutorial em vídeo de como fazer sua cópia e preencher o mês</li>' +
-            '<li>' + checkIcon() + ' Feita no Google Planilhas: você faz uma cópia para o seu Google Drive e usa com a sua conta Google</li>' +
+            '<li>' + checkIcon() + ' Feita no Google Planilhas: você faz uma cópia para o seu Google Drive e usa no computador ou no celular, pelo app do Google Planilhas</li>' +
+            '<li>' + checkIcon() + ' Suporte por e-mail e WhatsApp</li>' +
             '<li>' + checkIcon() + ' Pagamento por Pix ou cartão de crédito</li>' +
             '<li>' + checkIcon() + ' Acesso liberado pela plataforma após a confirmação do pagamento</li>' +
           '</ul>' +
-          '<div class="guarantee-strip">🛡️ Garantia de 7 dias</div>' +
+          '<div class="guarantee-strip">🛡️ Garantia incondicional de 7 dias: não gostou por qualquer motivo, é só pedir o reembolso</div>' +
         '</div>' +
 
         '<div class="final-cta-wrap">' +

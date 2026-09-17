@@ -254,7 +254,27 @@
       /* ---------- Oferta ---------- */
       '<section class="offer-section" id="offerSection" aria-labelledby="offerTitle">' +
         '<h2 class="offer-headline" id="offerTitle">Transforme esse primeiro passo em uma organização que você consegue acompanhar.</h2>' +
-        '<p class="offer-lead">A <strong>Planilha de Organização Financeira</strong> é uma planilha pronta para registrar o que entra e o que sai e acompanhar o seu mês em um só lugar — a estrutura que as ações acima pedem, sem você precisar montar do zero.</p>' +
+        '<p class="offer-lead">A <strong>Planilha de Organização Financeira</strong> é uma planilha pronta no Google Planilhas para registrar o que entra e o que sai e acompanhar o seu mês em um só lugar — a estrutura que as ações acima pedem, sem você precisar montar do zero.</p>' +
+
+        '<figure class="demo-video">' +
+          '<video controls playsinline preload="metadata" poster="assets/video/tutorial-poster.jpg" width="900" height="434">' +
+            '<source src="assets/video/tutorial-planilha.mp4" type="video/mp4">' +
+          '</video>' +
+          '<figcaption>Veja a planilha por dentro (3 min): como fazer sua cópia e preencher o mês.</figcaption>' +
+        '</figure>' +
+
+        '<div class="result-card features-card">' +
+          '<h3 class="features-title">O que a planilha tem</h3>' +
+          '<ul class="features-list">' +
+            '<li>' + checkIcon() + ' Uma aba por mês (janeiro a dezembro) mais uma aba de configuração</li>' +
+            '<li>' + checkIcon() + ' Resumo do mês: total de entradas, total de saídas e comparação com o mês anterior</li>' +
+            '<li>' + checkIcon() + ' "Restante para gastar": quanto ainda sobra depois do que já saiu</li>' +
+            '<li>' + checkIcon() + ' Gastos com categoria, forma de pagamento (débito/crédito), data e marcação de essencial</li>' +
+            '<li>' + checkIcon() + ' Contas do mês com valor planejado, valor pago e data — e o gráfico planejado vs. real</li>' +
+            '<li>' + checkIcon() + ' Reserva de emergência e metas (ex.: carro) com meta, reservado no mês e quanto falta</li>' +
+            '<li>' + checkIcon() + ' Reservas e investimentos registrados por tipo, e uso do débito e do crédito no mês</li>' +
+          '</ul>' +
+        '</div>' +
 
         '<div class="offer-card">' +
           '<span class="offer-title">Planilha de Organização Financeira</span>' +
@@ -264,6 +284,7 @@
           '</div>' +
           '<ul class="offer-includes">' +
             '<li>' + checkIcon() + ' Incluso nos R$17: a Planilha de Organização Financeira (produto digital)</li>' +
+            '<li>' + checkIcon() + ' Feita no Google Planilhas: você faz uma cópia para o seu Google Drive e usa com a sua conta Google</li>' +
             '<li>' + checkIcon() + ' Pagamento por Pix ou cartão de crédito</li>' +
             '<li>' + checkIcon() + ' Acesso liberado pela plataforma após a confirmação do pagamento</li>' +
           '</ul>' +
@@ -288,6 +309,13 @@
       Funnel.goToCheckout();
     });
     document.getElementById('restartBtnResult').addEventListener('click', restart);
+
+    var demoVideo = resultWrap.querySelector('.demo-video video');
+    if (demoVideo) {
+      demoVideo.addEventListener('play', function () {
+        Funnel.trackEvent('demo_video_play');
+      }, { once: true });
+    }
 
     observeOfferView();
   }

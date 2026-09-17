@@ -260,7 +260,7 @@
           '<video controls playsinline preload="metadata" poster="assets/video/tutorial-poster.jpg" width="900" height="434">' +
             '<source src="assets/video/tutorial-planilha.mp4" type="video/mp4">' +
           '</video>' +
-          '<figcaption>Veja a planilha por dentro (3 min): como fazer sua cópia e preencher o mês.</figcaption>' +
+          '<figcaption>Veja a planilha por dentro (3 min): este é o tutorial que acompanha a planilha, mostrando como fazer sua cópia e preencher o mês.</figcaption>' +
         '</figure>' +
 
         '<div class="result-card features-card">' +
@@ -284,6 +284,7 @@
           '</div>' +
           '<ul class="offer-includes">' +
             '<li>' + checkIcon() + ' Incluso nos R$17: a Planilha de Organização Financeira (produto digital)</li>' +
+            '<li>' + checkIcon() + ' Incluso: o tutorial em vídeo de como fazer sua cópia e preencher o mês</li>' +
             '<li>' + checkIcon() + ' Feita no Google Planilhas: você faz uma cópia para o seu Google Drive e usa com a sua conta Google</li>' +
             '<li>' + checkIcon() + ' Pagamento por Pix ou cartão de crédito</li>' +
             '<li>' + checkIcon() + ' Acesso liberado pela plataforma após a confirmação do pagamento</li>' +

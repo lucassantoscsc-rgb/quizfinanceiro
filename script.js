@@ -5,6 +5,19 @@
   var Funnel = window.Funnel;
 
   /* =========================================================
+     COPY SAZONAL — fim de 2026 / virada para 2027.
+     Fatos de calendário, sem urgência inventada.
+     Para desativar depois de janeiro/2027: troque `ativa` para
+     false (o funil volta ao texto atemporal) e reverta a headline
+     da abertura, conforme o comentário no index.html.
+     ========================================================= */
+  var SEASONAL = {
+    ativa: true,
+    titulo: 'Os próximos meses são os que mais mexem no orçamento',
+    texto: 'Entre o 13º, os gastos de fim de ano e as contas que chegam em janeiro — IPTU, IPVA, material escolar — os próximos meses concentram as maiores variações do ano. Quem entra neles com as contas mapeadas sente menos o impacto.'
+  };
+
+  /* =========================================================
      ESTADO + PERSISTÊNCIA (sessionStorage)
      Guarda só etapa e chaves das respostas — nada pessoal.
      ========================================================= */
@@ -251,9 +264,20 @@
         '<p class="actions-note">Isso é uma orientação inicial baseada no que você respondeu, não um diagnóstico definitivo. Você pode aplicar tudo isso sem comprar nada.</p>' +
       '</div>' +
 
+      (SEASONAL.ativa
+        ? '<div class="season-card">' +
+            '<span class="season-tag">📅 ' + SEASONAL.titulo + '</span>' +
+            '<p>' + SEASONAL.texto + '</p>' +
+          '</div>'
+        : '') +
+
       /* ---------- Oferta ---------- */
       '<section class="offer-section" id="offerSection" aria-labelledby="offerTitle">' +
-        '<h2 class="offer-headline" id="offerTitle">Transforme esse primeiro passo em uma organização que você consegue acompanhar.</h2>' +
+        '<h2 class="offer-headline" id="offerTitle">' +
+          (SEASONAL.ativa
+            ? 'Entre em 2027 com esse primeiro passo já dado.'
+            : 'Transforme esse primeiro passo em uma organização que você consegue acompanhar.') +
+        '</h2>' +
         '<p class="offer-lead">A <strong>Planilha de Organização Financeira</strong> é uma planilha pronta no Google Planilhas para registrar o que entra e o que sai e acompanhar o seu mês em um só lugar — a estrutura que as ações acima pedem, sem você precisar montar do zero.</p>' +
 
         '<figure class="demo-video">' +

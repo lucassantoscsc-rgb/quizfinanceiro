@@ -709,30 +709,22 @@ ul { margin: 0; padding: 0; list-style: none; }
 /* --- Garantia em destaque --- */
 .guarantee-block {
   display: flex;
-  align-items: flex-start;
-  gap: 18px;
-  padding: 24px;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+  padding: 26px 22px;
   border-radius: var(--radius-lg);
   background: var(--surface);
-  border: 2px solid var(--color-primary);
+  border: 2px solid var(--color-accent);
   box-shadow: var(--shadow-md);
 }
 .guarantee-seal {
   flex-shrink: 0;
-  width: 76px;
-  height: 76px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  line-height: 1;
-  box-shadow: 0 8px 20px rgba(13, 150, 104, 0.3);
+  width: 130px;
+  height: 130px;
+  filter: drop-shadow(0 6px 14px rgba(180, 112, 12, 0.3));
 }
-.guarantee-seal strong { font-family: var(--font-heading); font-size: 30px; font-weight: 800; }
-.guarantee-seal span { font-size: 12px; font-weight: 600; margin-top: 2px; }
 .guarantee-body h2 { font-size: 19px; font-weight: 700; margin-bottom: 8px; }
 .guarantee-body p { font-size: 15px; color: var(--text-secondary); margin-bottom: 8px; }
 .guarantee-body p:last-child { margin-bottom: 0; }
@@ -819,6 +811,8 @@ ul { margin: 0; padding: 0; list-style: none; }
 @media (min-width: 720px) {
   .benefit-grid { grid-template-columns: 1fr 1fr; }
   .pricing { grid-template-columns: 1fr 1fr; gap: 20px; }
+  /* no desktop o selo fica ao lado do texto */
+  .guarantee-block { flex-direction: row; align-items: center; text-align: left; gap: 26px; padding: 30px; }
   /* seções de grade respiram mais que o texto corrido */
   .benefit-grid, .pricing { width: min(880px, 100%); margin-left: auto; margin-right: auto; }
   #ofertas .sales-inner, .benefit-grid { max-width: none; }

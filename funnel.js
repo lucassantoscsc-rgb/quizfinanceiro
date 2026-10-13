@@ -23,7 +23,10 @@ window.Funnel = (function () {
   'use strict';
 
   var CHECKOUT_URL_BASE = 'https://pay.cakto.com.br/o7zxmb3_786993';
-  var FUNNEL_VARIANT = 'quiz';
+
+  /* Variante do funil, para comparar caminhos diferentes no mesmo produto.
+     Definida na página via <html data-funnel-variant="...">; sem isso, "quiz". */
+  var FUNNEL_VARIANT = document.documentElement.getAttribute('data-funnel-variant') || 'quiz';
   var PRODUCT_NAME = 'Planilha de Organização Financeira';
   var PRODUCT_VALUE = 17;
 

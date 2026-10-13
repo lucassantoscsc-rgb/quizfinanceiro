@@ -22,13 +22,28 @@
 window.Funnel = (function () {
   'use strict';
 
-  var CHECKOUT_URL_BASE = 'https://pay.cakto.com.br/o7zxmb3_786993';
+  /* Ofertas disponíveis. A chave é usada em goToCheckout('chave').
+     'essencial' é o padrão: é o que o quiz usa e o que já está no ar. */
+  var OFFERS = {
+    essencial: {
+      nome: 'Planilha de Organização Financeira',
+      valor: 17,
+      url: 'https://pay.cakto.com.br/o7zxmb3_786993'
+    },
+    completo: {
+      nome: 'Planilha de Organização Financeira + extras',
+      valor: 27,
+      /* TODO: criar a oferta de R$27 na Cakto e colar o link aqui.
+         Enquanto estiver assim, o botão de R$27 fica desativado na página. */
+      url: ''
+    }
+  };
+
+  var DEFAULT_OFFER = 'essencial';
 
   /* Variante do funil, para comparar caminhos diferentes no mesmo produto.
      Definida na página via <html data-funnel-variant="...">; sem isso, "quiz". */
   var FUNNEL_VARIANT = document.documentElement.getAttribute('data-funnel-variant') || 'quiz';
-  var PRODUCT_NAME = 'Planilha de Organização Financeira';
-  var PRODUCT_VALUE = 17;
 
   /* Parâmetros de atribuição repassados da URL de entrada para o checkout,
      sem alteração. UTMs + identificadores de clique + os usados pela Utmify. */
@@ -47,8 +62,18 @@ window.Funnel = (function () {
     return out;
   }
 
-  function buildCheckoutUrl(base) {
-    var url = base || CHECKOUT_URL_BASE;
+  function getOffer(offerKey) {
+    return OFFERS[offerKey] || OFFERS[DEFAULT_OFFER];
+  }
+
+  /* Oferta sem link configurado ainda não pode ser vendida. */
+  function isOfferReady(offerKey) {
+    return !!getOffer(offerKey).url;
+  }
+
+  function buildCheckoutUrl(offerKey) {
+    var url = getOffer(offerKey).url;
+    if (!url) return '';
     var qs = getPassThroughParams().toString();
     if (!qs) return url;
     return url + (url.indexOf('?') > -1 ? '&' : '?') + qs;
@@ -64,10 +89,11 @@ window.Funnel = (function () {
 
     if (typeof window.fbq === 'function') {
       if (eventName === 'checkout_click') {
+        var offer = getOffer(data.offer);
         // Saída para o checkout (não é compra). Um disparo por clique.
         window.fbq('track', 'InitiateCheckout', {
-          content_name: PRODUCT_NAME,
-          value: PRODUCT_VALUE,
+          content_name: offer.nome,
+          value: offer.valor,
           currency: 'BRL',
           funnel_variant: FUNNEL_VARIANT
         });
@@ -77,14 +103,20 @@ window.Funnel = (function () {
     }
   }
 
-  function goToCheckout(payload) {
-    trackEvent('checkout_click', payload);
-    window.location.href = buildCheckoutUrl();
+  function goToCheckout(offerKey, payload) {
+    var key = OFFERS[offerKey] ? offerKey : DEFAULT_OFFER;
+    var url = buildCheckoutUrl(key);
+    if (!url) return false;
+    trackEvent('checkout_click', Object.assign({ offer: key }, payload || {}));
+    window.location.href = url;
+    return true;
   }
 
   return {
-    CHECKOUT_URL_BASE: CHECKOUT_URL_BASE,
+    OFFERS: OFFERS,
     FUNNEL_VARIANT: FUNNEL_VARIANT,
+    getOffer: getOffer,
+    isOfferReady: isOfferReady,
     buildCheckoutUrl: buildCheckoutUrl,
     trackEvent: trackEvent,
     goToCheckout: goToCheckout

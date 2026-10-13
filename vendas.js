@@ -1,13 +1,13 @@
 /* =========================================================
    Página de vendas direta (variante "pagina").
-   Usa a mesma API compartilhada do quiz (funnel.js): mesmo
-   checkout, mesmas UTMs, mesmos nomes de evento.
+   Usa a mesma API compartilhada do quiz (funnel.js): mesmas
+   UTMs, mesmos nomes de evento, mesmas ofertas.
 
    Eventos desta página:
-     funnel_view     — ao abrir
-     offer_view      — quando o bloco de oferta entra na tela
-     demo_video_play — primeiro play do vídeo
-     checkout_click  — clique em qualquer CTA (com cta_position)
+     funnel_view     ao abrir
+     offer_view      quando o bloco de ofertas entra na tela
+     demo_video_play primeiro play do vídeo
+     checkout_click  clique de compra (com offer e cta_position)
    ========================================================= */
 (function () {
   'use strict';
@@ -16,14 +16,23 @@
 
   Funnel.trackEvent('funnel_view');
 
-  /* --- CTAs ---------------------------------------------------
-     O do topo é âncora para a oferta (não é saída para o checkout,
-     então não dispara checkout_click). Os demais vão para o pagamento. */
-  ['ctaOferta', 'ctaFinal'].forEach(function (id) {
-    var btn = document.getElementById(id);
-    if (!btn) return;
+  /* --- Botões de compra ----------------------------------------
+     Qualquer botão com data-offer leva ao checkout daquela oferta.
+     Oferta sem link configurado fica desativada, para nunca mandar
+     ninguém para um checkout que não existe. */
+  var botoes = document.querySelectorAll('[data-offer]');
+  Array.prototype.forEach.call(botoes, function (btn) {
+    var oferta = btn.dataset.offer;
+
+    if (!Funnel.isOfferReady(oferta)) {
+      btn.disabled = true;
+      btn.setAttribute('aria-disabled', 'true');
+      btn.title = 'Em breve';
+      return;
+    }
+
     btn.addEventListener('click', function () {
-      Funnel.goToCheckout({ cta_position: btn.dataset.cta });
+      Funnel.goToCheckout(oferta, { cta_position: btn.dataset.cta });
     });
   });
 
@@ -35,23 +44,23 @@
     }, { once: true });
   }
 
-  /* --- offer_view: uma vez, quando a oferta aparece ------------- */
-  var oferta = document.getElementById('oferta');
-  if (oferta) {
+  /* --- offer_view: uma vez, quando as ofertas aparecem ---------- */
+  var ofertas = document.getElementById('ofertas');
+  if (ofertas) {
     if (!('IntersectionObserver' in window)) {
       Funnel.trackEvent('offer_view');
     } else {
-      var fired = false;
+      var disparou = false;
       var io = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
-          if (entry.isIntersecting && !fired) {
-            fired = true;
+          if (entry.isIntersecting && !disparou) {
+            disparou = true;
             Funnel.trackEvent('offer_view');
             io.disconnect();
           }
         });
-      }, { threshold: 0.25 });
-      io.observe(oferta);
+      }, { threshold: 0.2 });
+      io.observe(ofertas);
     }
   }
 })();

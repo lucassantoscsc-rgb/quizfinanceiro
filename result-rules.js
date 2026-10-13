@@ -82,29 +82,29 @@ window.QuizRules = (function () {
     },
     reserva: {
       passo: 'começar uma reserva pequena e constante',
-      acao: 'Escolha um valor fixo que caiba no seu mês — mesmo que pequeno — e separe assim que o dinheiro entrar, antes de gastar. No começo, constância importa mais que o valor.',
-      acaoMesApertado: 'Antes de definir a reserva, feche o mês: veja o que entra, o que é fixo e o que sobra de verdade. A reserva começa com o valor que sobrar dessa conta — mesmo que pequeno — separado assim que o dinheiro entrar.'
+      acao: 'Escolha um valor fixo que caiba no seu mês, mesmo que pequeno, e separe assim que o dinheiro entrar, antes de gastar. No começo, constância importa mais que o valor.',
+      acaoMesApertado: 'Antes de definir a reserva, feche o mês: veja o que entra, o que é fixo e o que sobra de verdade. A reserva começa com o valor que sobrar dessa conta, mesmo que pequeno, separado assim que o dinheiro entrar.'
     },
     planejar: {
       passo: 'dar um destino ao dinheiro que sobra',
       acao: 'Defina para onde vai a sobra antes do mês começar: uma parte para reserva, uma para um objetivo e uma para gastos livres. Sem destino, a sobra tende a ser gasta sem perceber.',
-      acaoMesApertado: 'Pelas suas respostas, a sobra ainda não é constante. Comece registrando entradas e saídas do mês para saber quanto realmente sobra — o planejamento vem depois desse número.'
+      acaoMesApertado: 'Pelas suas respostas, a sobra ainda não é constante. Comece registrando entradas e saídas do mês para saber quanto realmente sobra. O planejamento vem depois desse número.'
     }
   };
 
   /* P1 — frase que adapta ao método atual */
   var METODO = {
     nao_acompanho: 'Como você ainda não acompanha, comece simples: registrar o que entra e o que sai por um mês já muda a visão.',
-    anotacoes: 'Você já anota, mas se perde — o ponto é concentrar tudo em um único lugar, no mesmo formato todo mês.',
-    app_sem_manter: 'Você já tentou aplicativo ou planilha e não manteve — vale reduzir para o mínimo que você consegue atualizar de verdade.',
-    acompanho: 'Você já acompanha — o próximo nível é usar o registro para decidir, não só para conferir.'
+    anotacoes: 'Você já anota, mas se perde. O ponto é concentrar tudo em um único lugar, no mesmo formato todo mês.',
+    app_sem_manter: 'Você já tentou aplicativo ou planilha e não manteve. Vale reduzir para o mínimo que você consegue atualizar de verdade.',
+    acompanho: 'Você já acompanha. O próximo nível é usar o registro para decidir, não só para conferir.'
   };
 
   /* P2 — contexto do fim do mês */
   var MES = {
     falta: 'No fim do mês falta dinheiro para fechar as contas, então o foco inicial é enxergar o mês inteiro antes de qualquer meta.',
     acaba: 'O dinheiro acaba e quase nada sobra, então o objetivo dos próximos meses é abrir uma folga, mesmo pequena.',
-    sobra_sem_plano: 'Sobra um pouco, mas sem plano — o que falta não é dinheiro, é destino.',
+    sobra_sem_plano: 'Sobra um pouco, mas sem plano. O que falta não é dinheiro, é destino.',
     guardo: 'Você já consegue guardar, então o ganho está em organizar melhor o que já funciona.'
   };
 
@@ -124,16 +124,16 @@ window.QuizRules = (function () {
     },
     nao_sei: {
       rotulo: 'Ainda não identificado',
-      acao: 'Registre todos os gastos por 30 dias, sem julgar. No fim, agrupe por tipo — o que mais pesa costuma aparecer sozinho.'
+      acao: 'Registre todos os gastos por 30 dias, sem julgar. No fim, agrupe por tipo. O que mais pesa costuma aparecer sozinho.'
     }
   };
 
   /* P5 — rotina (ação 3) */
   var DIFICULDADE = {
-    comecar: 'Comece hoje com o mês atual, mesmo incompleto. Um registro simples já é um começo — não espere o mês virar.',
+    comecar: 'Comece hoje com o mês atual, mesmo incompleto. Um registro simples já é um começo. Não espere o mês virar.',
     esqueco: 'Escolha um horário fixo na semana (ex.: domingo à noite) para atualizar em 10 minutos. Uma rotina curta e marcada é mais fácil de manter.',
     complicado: 'Mantenha só o básico: entrada, saída e saldo. Se a ferramenta pede mais que isso no começo, simplifique.',
-    rotina: 'Sua rotina já existe — use-a para revisar uma decisão por mês: um gasto para reduzir ou uma meta para ajustar.'
+    rotina: 'Sua rotina já existe. Aproveite para revisar uma decisão por mês: um gasto para reduzir ou uma meta para ajustar.'
   };
 
   function isComplete(answers) {

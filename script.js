@@ -14,7 +14,7 @@
   var SEASONAL = {
     ativa: true,
     titulo: 'Os próximos meses são os que mais mexem no orçamento',
-    texto: 'Entre o 13º, os gastos de fim de ano e as contas que chegam em janeiro — IPTU, IPVA, material escolar — os próximos meses concentram as maiores variações do ano. Quem entra neles com as contas mapeadas sente menos o impacto.'
+    texto: 'Entre o 13º, os gastos de fim de ano e as contas que chegam em janeiro, como IPTU, IPVA e material escolar, os próximos meses concentram as maiores variações do ano. Quem entra neles com as contas mapeadas sente menos o impacto.'
   };
 
   /* =========================================================
@@ -278,7 +278,7 @@
             ? 'Entre em 2027 com esse primeiro passo já dado.'
             : 'Transforme esse primeiro passo em uma organização que você consegue acompanhar.') +
         '</h2>' +
-        '<p class="offer-lead">A <strong>Planilha de Organização Financeira</strong> é uma planilha pronta no Google Planilhas para registrar o que entra e o que sai e acompanhar o seu mês em um só lugar — a estrutura que as ações acima pedem, sem você precisar montar do zero.</p>' +
+        '<p class="offer-lead">A <strong>Planilha de Organização Financeira</strong> é uma planilha pronta no Google Planilhas para registrar o que entra e o que sai e acompanhar o seu mês em um só lugar. É a estrutura que as ações acima pedem, sem você precisar montar do zero.</p>' +
 
         '<figure class="demo-video">' +
           '<video controls playsinline preload="metadata" poster="assets/video/tutorial-poster.jpg" width="900" height="434">' +
@@ -294,7 +294,7 @@
             '<li>' + checkIcon() + ' Resumo do mês: total de entradas, total de saídas e comparação com o mês anterior</li>' +
             '<li>' + checkIcon() + ' "Restante para gastar": quanto ainda sobra depois do que já saiu</li>' +
             '<li>' + checkIcon() + ' Gastos com categoria, forma de pagamento (débito/crédito), data e marcação de essencial</li>' +
-            '<li>' + checkIcon() + ' Contas do mês com valor planejado, valor pago e data — e o gráfico planejado vs. real</li>' +
+            '<li>' + checkIcon() + ' Contas do mês com valor planejado, valor pago e data, além do gráfico planejado vs. real</li>' +
             '<li>' + checkIcon() + ' Reserva de emergência e metas (ex.: carro) com meta, reservado no mês e quanto falta</li>' +
             '<li>' + checkIcon() + ' Reservas e investimentos registrados por tipo, e uso do débito e do crédito no mês</li>' +
           '</ul>' +

@@ -321,10 +321,8 @@
           '<button class="btn btn-primary btn-large btn-pulse" id="finalCtaBtn" type="button">' +
             'Quero minha planilha por R$17' + arrowIcon() +
           '</button>' +
-          '<span class="final-cta-note">Compra processada pela Cakto. O checkout pode incluir uma taxa de serviço da plataforma.</span>' +
+          '<span class="final-cta-note">Acesso imediato após a confirmação do pagamento</span>' +
         '</div>' +
-
-        '<p class="offer-extras">No checkout existem dois adicionais opcionais, cobrados à parte e <strong>não inclusos</strong> nos R$17: Projeto 10k em 6 meses (R$9,90) e Planilha de Quitação de Dívidas (R$7,90).</p>' +
       '</section>' +
 
       '<div class="result-footer">' +

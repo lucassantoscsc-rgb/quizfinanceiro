@@ -642,7 +642,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 .sales-hero {
   position: relative;
   overflow: hidden;
-  padding: 36px 0 0;
+  padding: 36px 0 34px;
   text-align: center;
   color: #fff;
   background: linear-gradient(170deg, #06513a, var(--color-primary-dark) 45%, #0b8159);

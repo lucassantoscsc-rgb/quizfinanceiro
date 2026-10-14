@@ -686,27 +686,46 @@ ul { margin: 0; padding: 0; list-style: none; }
 }
 .section-tag--light { color: var(--color-accent); }
 
-/* Faixa de números: recebe a imagem que avança sobre ela */
+/* Letreiro de fatos do produto */
 .stats-band {
   background: var(--surface);
   border-bottom: 1px solid var(--border);
-  padding: 30px 0 22px;
+  padding: 22px 0;
 }
-.stat-row {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  text-align: center;
+.ticker {
+  overflow: hidden;
+  /* desvanece nas pontas para o corte não ficar seco */
+  -webkit-mask: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
 }
-.stat-row li { display: flex; flex-direction: column; gap: 2px; }
-.stat-row strong {
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker 32s linear infinite;
+}
+.ticker:hover .ticker-track { animation-play-state: paused; }
+.ticker-track li {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  padding: 0 20px;
+  white-space: nowrap;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+/* separador entre itens */
+.ticker-track li + li { border-left: 1px solid var(--border); }
+.ticker-track strong {
   font-family: var(--font-heading);
-  font-size: clamp(22px, 6vw, 28px);
+  font-size: 20px;
   font-weight: 800;
   color: var(--color-primary);
   line-height: 1;
 }
-.stat-row span { font-size: 12px; color: var(--text-muted); }
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
 .sales-h1 {
   font-size: clamp(28px, 7.4vw, 42px);
   font-weight: 800;
@@ -1020,4 +1039,9 @@ ul { margin: 0; padding: 0; list-style: none; }
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
+  /* sem o laço, o letreiro vira uma lista centralizada em vez de uma fila cortada */
+  .ticker { -webkit-mask: none; mask: none; }
+  .ticker-track { flex-wrap: wrap; width: auto; justify-content: center; row-gap: 10px; }
+  .ticker-track li[aria-hidden="true"] { display: none; }
+  .ticker-track li + li { border-left: none; }
 }

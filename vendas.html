@@ -57,13 +57,25 @@ fbq('track', 'PageView');
     </div>
   </section>
 
-  <!-- ====================== NÚMEROS DO PRODUTO ====================== -->
-  <section class="stats-band">
-    <div class="sales-inner">
-      <ul class="stat-row">
-        <li><strong>12</strong><span>meses, um por aba</span></li>
-        <li><strong>3 min</strong><span>de tutorial em vídeo</span></li>
-        <li><strong>7 dias</strong><span>de garantia</span></li>
+  <!-- ====================== NÚMEROS DO PRODUTO ======================
+       Letreiro contínuo. A lista é repetida uma vez (a cópia fica
+       oculta para leitores de tela) para o laço não ter emenda. -->
+  <section class="stats-band" aria-label="Resumo do produto">
+    <div class="ticker">
+      <ul class="ticker-track">
+        <li><strong>12</strong> meses, um por aba</li>
+        <li><strong>3 min</strong> de tutorial em vídeo</li>
+        <li><strong>7 dias</strong> de garantia</li>
+        <li><strong>R$17</strong> pagamento único</li>
+        <li><strong>Pix</strong> ou cartão de crédito</li>
+        <li><strong>Celular</strong> ou computador</li>
+
+        <li aria-hidden="true"><strong>12</strong> meses, um por aba</li>
+        <li aria-hidden="true"><strong>3 min</strong> de tutorial em vídeo</li>
+        <li aria-hidden="true"><strong>7 dias</strong> de garantia</li>
+        <li aria-hidden="true"><strong>R$17</strong> pagamento único</li>
+        <li aria-hidden="true"><strong>Pix</strong> ou cartão de crédito</li>
+        <li aria-hidden="true"><strong>Celular</strong> ou computador</li>
       </ul>
     </div>
   </section>

@@ -63,7 +63,6 @@
      DOM REFS
      ========================================================= */
   var topbar = document.getElementById('topbar');
-  var backBtn = document.getElementById('backBtn');
   var restartBtnTop = document.getElementById('restartBtnTop');
   var progressFill = document.getElementById('progressFill');
   var progressLabel = document.getElementById('progressLabel');
@@ -103,9 +102,14 @@
      ========================================================= */
   startBtn.addEventListener('click', function () {
     Funnel.trackEvent('quiz_start');
+    /* Começa sempre do zero: sem isso, respostas de uma tentativa
+       anterior guardadas em memória se misturariam com as novas e o
+       resultado sairia errado. Como não dá para voltar e corrigir,
+       uma resposta velha passaria despercebida. */
+    state.answers = {};
     state.currentQuestion = 0;
     showScreen('quiz');
-    renderQuestion(0, 'fwd', true);
+    renderQuestion(0, true);
     saveProgress();
   });
 
@@ -138,7 +142,8 @@
     );
   }
 
-  function renderQuestion(index, direction, skipAnim) {
+  /* O quiz só avança: não há navegação para a pergunta anterior. */
+  function renderQuestion(index, skipAnim) {
     var q = QUESTIONS[index];
     var savedValue = state.answers[q.id];
     renderProgress(index);
@@ -148,25 +153,23 @@
       bindOptionClicks(q, index);
 
       if (!skipAnim) {
-        var startClass = direction === 'back' ? 'slide-in-back-start' : 'slide-in-fwd-start';
-        questionSlide.classList.add(startClass);
+        questionSlide.classList.add('slide-in-fwd-start');
         void questionSlide.offsetWidth; // força reflow para a transição partir do estado inicial
         requestAnimationFrame(function () {
-          questionSlide.classList.remove(startClass);
+          questionSlide.classList.remove('slide-in-fwd-start');
         });
       }
     }
 
     if (skipAnim) {
-      questionSlide.classList.remove('slide-out-fwd', 'slide-out-back');
+      questionSlide.classList.remove('slide-out-fwd');
       paint();
       return;
     }
 
-    var outClass = direction === 'back' ? 'slide-out-back' : 'slide-out-fwd';
-    questionSlide.classList.add(outClass);
+    questionSlide.classList.add('slide-out-fwd');
     window.setTimeout(function () {
-      questionSlide.classList.remove(outClass);
+      questionSlide.classList.remove('slide-out-fwd');
       paint();
     }, 260);
   }
@@ -202,7 +205,7 @@
     if (index < QUESTIONS.length - 1) {
       state.currentQuestion = index + 1;
       saveProgress();
-      renderQuestion(state.currentQuestion, 'fwd');
+      renderQuestion(state.currentQuestion);
       return;
     }
     Funnel.trackEvent('quiz_complete');
@@ -210,17 +213,6 @@
     showScreen('result');
     saveProgress();
   }
-
-  backBtn.addEventListener('click', function () {
-    if (state.currentQuestion === 0) {
-      showScreen('intro');
-      saveProgress();
-      return;
-    }
-    state.currentQuestion -= 1;
-    saveProgress();
-    renderQuestion(state.currentQuestion, 'back');
-  });
 
   restartBtnTop.addEventListener('click', restart);
 
@@ -380,7 +372,7 @@
 
     if (saved.screen === 'quiz') {
       showScreen('quiz');
-      renderQuestion(state.currentQuestion, 'fwd', true);
+      renderQuestion(state.currentQuestion, true);
     } else if (saved.screen === 'result' && window.QuizRules.isComplete(state.answers)) {
       renderResult();
       showScreen('result');

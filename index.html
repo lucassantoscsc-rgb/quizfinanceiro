@@ -47,13 +47,9 @@ fbq('track', 'PageView');
 
 <div class="app" id="app">
 
-  <!-- Barra superior: só aparece durante o quiz -->
+  <!-- Barra superior: só aparece durante o quiz.
+       Sem botão de voltar: o avanço é de mão única, por decisão de produto. -->
   <header class="topbar" id="topbar" hidden>
-    <button class="back-btn" id="backBtn" type="button" aria-label="Voltar para a pergunta anterior">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </button>
     <div class="progress-wrap">
       <div class="progress-track">
         <div class="progress-fill" id="progressFill"></div>
@@ -78,14 +74,12 @@ fbq('track', 'PageView');
              Subtítulo: "Responda 5 perguntas rápidas e receba uma orientação para começar." -->
         <h1 class="intro-headline">Qual é o <span class="hl">primeiro passo</span> para começar 2027 com as contas em ordem?</h1>
 
-        <p class="intro-subtext">Responda 5 perguntas rápidas e receba uma orientação para começar ainda este ano.</p>
+        <p class="intro-subtext">Responda 5 perguntas em cerca de 30 segundos e receba uma orientação para começar ainda este ano.</p>
 
         <button class="btn btn-primary btn-pulse btn-large" id="startBtn" type="button">
           Descobrir meu primeiro passo
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
-
-        <p class="intro-note">Resultado gratuito. Ao final, você também poderá conhecer nossa planilha de R$17.</p>
       </div>
     </section>
 

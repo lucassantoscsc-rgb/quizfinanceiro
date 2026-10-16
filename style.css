@@ -117,28 +117,11 @@ ul { margin: 0; padding: 0; list-style: none; }
   z-index: 20;
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 14px 16px;
+  gap: 14px;
+  padding: 14px 20px;   /* alinha a barra com o conteúdo do quiz abaixo */
   background: rgba(243, 246, 245, 0.85);
   backdrop-filter: blur(8px);
 }
-
-.back-btn {
-  flex-shrink: 0;
-  width: 38px;
-  height: 38px;
-  border-radius: var(--radius-pill);
-  border: 1px solid var(--border);
-  background: var(--surface);
-  color: var(--text-secondary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: transform var(--transition-fast), background var(--transition-fast);
-}
-.back-btn:hover { background: var(--surface-alt); }
-.back-btn:active { transform: scale(0.92); }
 
 .progress-wrap {
   flex: 1;
@@ -309,12 +292,6 @@ ul { margin: 0; padding: 0; list-style: none; }
   max-width: 42ch;
 }
 
-.intro-note {
-  font-size: 13px;
-  color: var(--text-muted);
-  max-width: 40ch;
-}
-
 /* =========================================================
    TELA 2 — QUIZ
    ========================================================= */
@@ -329,9 +306,7 @@ ul { margin: 0; padding: 0; list-style: none; }
   transition: opacity var(--transition-base), transform var(--transition-base);
 }
 .question-slide.slide-out-fwd { opacity: 0; transform: translateX(-28px); }
-.question-slide.slide-out-back { opacity: 0; transform: translateX(28px); }
 .question-slide.slide-in-fwd-start { opacity: 0; transform: translateX(28px); transition: none; }
-.question-slide.slide-in-back-start { opacity: 0; transform: translateX(-28px); transition: none; }
 
 .question-title {
   font-size: clamp(21px, 5.2vw, 26px);

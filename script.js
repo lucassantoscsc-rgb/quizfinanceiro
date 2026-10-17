@@ -219,6 +219,42 @@
   /* =========================================================
      TELA 3 — RESULTADO + OFERTA
      ========================================================= */
+  /* Motivos para o app a partir das respostas (até 3). Fica só na tela: as respostas
+     nunca vão para o rastreamento. */
+  function recomendacaoApp(r) {
+    r = r || {};
+    var DIF = {
+      esqueco: '⏰ Você disse que <strong>esquece de atualizar</strong>: o app te lembra todo dia e deixa lançar um gasto em segundos, até falando.',
+      complicado: '🧩 Você acha as ferramentas <strong>complicadas</strong>: no app, lançar um gasto leva 3 toques, e um tutorial guiado mostra tudo no primeiro acesso.',
+      comecar: '🤔 Você <strong>não sabe por onde começar</strong>: o app tem um tutorial passo a passo e já vem com categorias e metas prontas.',
+      rotina: '🔁 Você já tem uma rotina: o app traz dicas automáticas, calendário e retrospectiva do mês para levar seu controle a outro nível.'
+    };
+    var PESO = {
+      dividas: '💳 <strong>Dívidas e parcelas</strong> pesam para você: o app mostra quando cada dívida termina, quanto de juros falta e monta um plano para quitar mais rápido.',
+      variaveis: '🛍️ Os <strong>gastos com compras e delivery</strong> pesam: o app avisa quando uma categoria passa do normal e encontra suas assinaturas.',
+      essenciais: '🏠 Suas <strong>despesas essenciais</strong> são altas: o app mostra quanto dá para gastar por dia e simula se uma compra cabe antes de você gastar.',
+      nao_sei: '❓ Você <strong>não sabe o que mais pesa</strong>: os gráficos do app mostram para onde vai cada real, e as dicas apontam o que está fora do normal.'
+    };
+    var PRIO = {
+      dividas: PESO.dividas,
+      reserva: '🐷 Você quer <strong>começar uma reserva</strong>: o app calcula a reserva ideal para você e mostra quanto guardar por mês.',
+      planejar: '🎯 Você quer <strong>planejar o que sobra</strong>: com os cofrinhos, você define objetivos e o app diz quanto guardar por mês para cada um.',
+      contas: '🗂️ Você quer <strong>organizar as contas</strong>: o app avisa as contas que vão vencer e copia as contas fixas para o mês seguinte.'
+    };
+    var motivos = [];
+    var add = function (t) { if (t && motivos.indexOf(t) < 0 && motivos.length < 3) motivos.push(t); };
+    add(DIF[r.dificuldade]);
+    if (r.metodo === 'app_sem_manter') add('📱 Você já tentou e <strong>não conseguiu manter</strong>: o app tem lembretes, sequência de dias e conquistas que ajudam a criar o hábito.');
+    add(PESO[r.peso]);
+    add(PRIO[r.prioridade]);
+    if (!motivos.length) return '';
+    return '<div class="reco-card">' +
+        '<span class="reco-tag">💡 Pelo que você respondeu</span>' +
+        '<h3 class="reco-title">O app combina mais com você</h3>' +
+        '<ul class="reco-list">' + motivos.map(function (m) { return '<li>' + m + '</li>'; }).join('') + '</ul>' +
+      '</div>';
+  }
+
   function compareRow(item, planilha, app) {
     var marca = function (v, cls) { return '<td class="' + cls + (v === '—' ? ' no' : '') + '">' + v + '</td>'; };
     return '<tr><th scope="row">' + item + '</th>' + marca(planilha, 'col-plan') + marca(app, 'col-app') + '</tr>';
@@ -294,6 +330,18 @@
             '<li>' + checkIcon() + ' Reserva de emergência e metas (ex.: carro) com meta, reservado no mês e quanto falta</li>' +
             '<li>' + checkIcon() + ' Reservas e investimentos registrados por tipo, e uso do débito e do crédito no mês</li>' +
           '</ul>' +
+        '</div>' +
+
+        /* Por que o app combina com o que a pessoa respondeu */
+        recomendacaoApp(state.answers) +
+
+        '<div class="app-live app-live--quiz" data-app-live="quiz-resultado">' +
+          '<span class="reco-tag">📱 Experimente agora, sem cadastro</span>' +
+          '<div class="phone">' +
+            '<img class="phone-poster" src="assets/app/app-resumo.jpg" alt="Tela inicial do app com o restante para gastar no mês" width="600" height="1298" loading="lazy">' +
+            '<button class="phone-play" type="button">▶ Toque para experimentar</button>' +
+          '</div>' +
+          '<p class="app-live-note">É o app de verdade, com dados de exemplo. Toque, navegue e lance um gasto.</p>' +
         '</div>' +
 
         /* Comparação rápida: o app faz tudo da planilha e mais. */
@@ -374,6 +422,7 @@
     if (!Funnel.isOfferReady('app')) { appBuy.disabled = true; appBuy.title = 'Em breve'; }
     else appBuy.addEventListener('click', function () { Funnel.goToCheckout('app', { cta_position: 'quiz-resultado' }); });
     document.getElementById('restartBtnResult').addEventListener('click', restart);
+    Funnel.ativarAppAoVivo(resultWrap);
 
     var demoVideo = resultWrap.querySelector('.demo-video video');
     if (demoVideo) {

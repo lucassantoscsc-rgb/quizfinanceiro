@@ -123,6 +123,36 @@ window.Funnel = (function () {
     trackEvent: trackEvent,
     goToCheckout: goToCheckout,
     APP_DEMO_URL: APP_DEMO_URL,
+    /* Celular com a demonstração ao vivo: começa como imagem e só carrega o app
+       quando a pessoa toca (a página continua leve). Marcação:
+       <div class="app-live" data-app-live="posicao"><div class="phone">…<button class="phone-play">… */
+    ativarAppAoVivo: function (raiz) {
+      Array.prototype.forEach.call((raiz || document).querySelectorAll('[data-app-live]'), function (el) {
+        if (el.dataset.pronto) return;
+        el.dataset.pronto = '1';
+        var botao = el.querySelector('.phone-play');
+        if (!botao) return;
+        botao.addEventListener('click', function () {
+          trackEvent('app_embed_start', { cta_position: el.dataset.appLive });
+          var tela = el.querySelector('.phone');
+          var f = document.createElement('iframe');
+          f.src = APP_DEMO_URL + '?embed=1';
+          f.title = 'Demonstração do app Organização Financeira';
+          tela.innerHTML = '';
+          tela.appendChild(f);
+          el.classList.add('ativo');
+          /* Desenha o app na largura de um iPhone (375px) e reduz para caber no celular da página. */
+          var ajustar = function () {
+            var esc = tela.clientWidth / 375;
+            f.style.width = '375px';
+            f.style.height = (tela.clientHeight / esc) + 'px';
+            f.style.transform = 'scale(' + esc + ')';
+          };
+          ajustar();
+          window.addEventListener('resize', ajustar);
+        });
+      });
+    },
     /* Abre a demonstração do app em outra aba e registra o clique. */
     openAppDemo: function (payload) {
       trackEvent('app_demo_click', payload || {});

@@ -8,7 +8,8 @@
      offer_view      quando o bloco de ofertas entra na tela
      demo_video_play primeiro play do vídeo
      checkout_click  clique de compra (com offer e cta_position)
-     app_demo_click  clique para experimentar a demonstração do app
+     app_demo_click  clique para experimentar a demonstração do app (outra aba)
+     app_embed_start toque para usar o app dentro da página
    ========================================================= */
 (function () {
   'use strict';
@@ -45,6 +46,8 @@
       Funnel.openAppDemo({ cta_position: el.dataset.appDemo });
     });
   });
+
+  Funnel.ativarAppAoVivo();
 
   /* --- Vídeo --------------------------------------------------- */
   var video = document.querySelector('.demo-video video');

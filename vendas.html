@@ -67,6 +67,7 @@ fbq('track', 'PageView');
         <li><strong>3 min</strong> de tutorial em vídeo</li>
         <li><strong>7 dias</strong> de garantia</li>
         <li><strong>R$17</strong> pagamento único</li>
+        <li><strong>Vitalício</strong> sem mensalidade</li>
         <li><strong>Pix</strong> ou cartão de crédito</li>
         <li><strong>Celular</strong> ou computador</li>
         <li><strong>App</strong> para iPhone e Android</li>
@@ -75,6 +76,7 @@ fbq('track', 'PageView');
         <li aria-hidden="true"><strong>3 min</strong> de tutorial em vídeo</li>
         <li aria-hidden="true"><strong>7 dias</strong> de garantia</li>
         <li aria-hidden="true"><strong>R$17</strong> pagamento único</li>
+        <li aria-hidden="true"><strong>Vitalício</strong> sem mensalidade</li>
         <li aria-hidden="true"><strong>Pix</strong> ou cartão de crédito</li>
         <li aria-hidden="true"><strong>Celular</strong> ou computador</li>
         <li aria-hidden="true"><strong>App</strong> para iPhone e Android</li>
@@ -261,9 +263,46 @@ fbq('track', 'PageView');
       <h2 class="sales-h2">Escolha como quer usar</h2>
       <p class="sales-text sales-text--center">Planilha no computador ou app no celular. Pagamento único nos dois, mesma garantia de 7 dias.</p>
 
+      <div class="compare-card compare-card--sales">
+        <h3 class="compare-title">Planilha ou app? Veja a diferença</h3>
+        <table class="compare">
+          <thead><tr><th></th><th>Planilha</th><th class="col-app">App ⭐</th></tr></thead>
+          <tbody><tr><th scope="row">Entradas, gastos, contas e metas</th><td class="col-plan">✓</td><td class="col-app">✓</td></tr><tr><th scope="row">“Restante para gastar” e gráficos</th><td class="col-plan">✓</td><td class="col-app">✓</td></tr><tr><th scope="row">Lançar em segundos no celular, até falando</th><td class="col-plan no">—</td><td class="col-app">✓</td></tr><tr><th scope="row">Faturas do cartão e parcelas automáticas</th><td class="col-plan no">—</td><td class="col-app">✓</td></tr><tr><th scope="row">Cofrinhos, orçamentos e dicas do mês</th><td class="col-plan">Metas</td><td class="col-app">✓</td></tr><tr><th scope="row">Lembretes de contas no celular</th><td class="col-plan no">—</td><td class="col-app">✓</td></tr><tr><th scope="row">Funciona sem internet</th><td class="col-plan no">—</td><td class="col-app">✓</td></tr><tr><th scope="row">Acesso vitalício, sem mensalidade</th><td class="col-plan">✓</td><td class="col-app">✓</td></tr><tr><th scope="row">Preço (pagamento único)</th><td class="col-plan">R$17</td><td class="col-app">R$27</td></tr></tbody>
+        </table>
+      </div>
+
       <div class="pricing">
 
-        <!-- Oferta 1: essencial -->
+        <!-- Oferta 1: app no celular (destaque, vem primeiro).
+             O link do checkout fica em funnel.js (OFFERS.app). Sem link, o botão aparece desativado. -->
+        <article class="price-card price-card--featured">
+          <span class="price-badge">⭐ Mais vantajoso</span>
+          <header class="price-head">
+            <span class="price-name">📱 App no celular</span>
+            <div class="price-row">
+              <span class="price-value">R$27</span>
+              <span class="price-meta">pagamento único</span>
+            </div>
+            <span class="price-diff">Só R$10 a mais que a planilha</span>
+            <p class="price-desc">Tudo o que a planilha faz, no seu celular e com as contas feitas sozinhas.</p>
+          </header>
+          <ul class="price-list">
+            <li class="price-destaque"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 13L9.5 17.5L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> <span><strong>Acesso vitalício, sem mensalidade</strong>, com todas as atualizações</span></li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 13L9.5 17.5L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> App para iPhone e Android, instalado na tela inicial</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 13L9.5 17.5L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Lança gastos em segundos, até falando</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 13L9.5 17.5L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Cartões, faturas e parcelas automáticas</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 13L9.5 17.5L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Cofrinhos, orçamentos e dicas do mês</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 13L9.5 17.5L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Lembretes de contas no celular</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 13L9.5 17.5L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Garantia incondicional de 7 dias</li>
+          </ul>
+          <button class="btn btn-primary btn-large btn-pulse" type="button" data-offer="app" data-cta="card-app">
+            Quero o app por R$27
+          </button>
+          <a class="price-demo" href="https://organizacao-financeira-seven.vercel.app/demo" target="_blank" rel="noopener" data-app-demo="card-app">👀 Experimentar grátis antes de comprar</a>
+          <p class="price-foot">Acesso com o e-mail da compra, em até 3 aparelhos. Sem mensalidade.</p>
+        </article>
+
+        <!-- Oferta 2: planilha -->
         <article class="price-card">
           <header class="price-head">
             <span class="price-name">📊 Planilha</span>
@@ -282,33 +321,6 @@ fbq('track', 'PageView');
           <button class="btn btn-outline btn-large" type="button" data-offer="essencial" data-cta="card-essencial">
             Quero a planilha por R$17
           </button>
-        </article>
-
-        <!-- Oferta 2: app no celular (destaque).
-             O link do checkout fica em funnel.js (OFFERS.app). Sem link, o botão aparece desativado. -->
-        <article class="price-card price-card--featured">
-          <span class="price-badge">Mais prático</span>
-          <header class="price-head">
-            <span class="price-name">📱 App no celular</span>
-            <div class="price-row">
-              <span class="price-value">R$27</span>
-              <span class="price-meta">pagamento único</span>
-            </div>
-            <p class="price-desc">Organização financeira no bolso, com as contas feitas sozinhas.</p>
-          </header>
-          <ul class="price-list">
-            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 13L9.5 17.5L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> App para iPhone e Android, instalado na tela inicial</li>
-            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 13L9.5 17.5L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Lança gastos em segundos, até falando</li>
-            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 13L9.5 17.5L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Cartões, faturas e parcelas automáticas</li>
-            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 13L9.5 17.5L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Cofrinhos, orçamentos e dicas do mês</li>
-            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 13L9.5 17.5L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Lembretes de contas no celular</li>
-            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 13L9.5 17.5L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Garantia incondicional de 7 dias</li>
-          </ul>
-          <button class="btn btn-primary btn-large btn-pulse" type="button" data-offer="app" data-cta="card-app">
-            Quero o app por R$27
-          </button>
-          <a class="price-demo" href="https://organizacao-financeira-seven.vercel.app/demo" target="_blank" rel="noopener" data-app-demo="card-app">👀 Experimentar grátis antes de comprar</a>
-          <p class="price-foot">Acesso com o e-mail da compra, em até 3 aparelhos. Sem mensalidade.</p>
         </article>
 
       </div>
@@ -349,7 +361,7 @@ fbq('track', 'PageView');
         </details>
         <details class="faq-item">
           <summary>É assinatura ou mensalidade?</summary>
-          <p>Não. É pagamento único, nas duas opções.</p>
+          <p>Não. É pagamento único e o acesso é vitalício, nas duas opções. Sem mensalidade, e o app recebe as atualizações sem custo extra.</p>
         </details>
         <details class="faq-item">
           <summary>Como recebo depois de pagar?</summary>

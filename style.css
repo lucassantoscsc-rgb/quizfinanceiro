@@ -1070,17 +1070,43 @@ ul { margin: 0; padding: 0; list-style: none; }
   padding: 6px;
 }
 
-/* Alternativa do app no resultado do quiz */
-.app-alt {
-  margin-top: 22px;
-  border: 1.5px dashed var(--color-primary);
-  border-radius: 18px;
-  padding: 18px;
-  background: var(--color-primary-bg);
-  text-align: center;
+/* Resultado do quiz: comparação + duas ofertas do mesmo tamanho (app em destaque) */
+.compare-card { background: var(--surface); border-radius: var(--radius-lg); padding: 18px 16px; box-shadow: var(--shadow-sm); }
+.compare-title { font-family: var(--font-heading); font-size: 17px; text-align: center; margin-bottom: 12px; }
+.compare { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+.compare th, .compare td { padding: 9px 6px; border-bottom: 1px solid rgba(0,0,0,.06); text-align: center; }
+.compare tbody th { text-align: left; font-weight: 500; color: var(--text-secondary); }
+.compare thead th { font-size: 13px; font-weight: 700; }
+.compare .col-plan { width: 22%; color: var(--text-secondary); }
+.compare .col-app { width: 22%; font-weight: 700; color: var(--color-primary-dark); background: var(--color-primary-bg); }
+.compare thead .col-app { border-radius: 10px 10px 0 0; }
+.compare td.no { color: #b8c2bf; }
+.compare tr:last-child th, .compare tr:last-child td { border-bottom: 0; font-weight: 700; color: var(--text-primary, #10201f); }
+
+.offer-card { position: relative; }
+.offer-card--app { border: 3px solid #fcd34d; box-shadow: 0 18px 40px rgba(8, 107, 76, .35); margin-top: 8px; }
+.offer-badge {
+  position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+  background: linear-gradient(135deg, #fcd34d, #e39b12); color: #0a3f2d;
+  font-size: 12.5px; font-weight: 800; padding: 5px 14px; border-radius: 999px; white-space: nowrap;
+  box-shadow: 0 6px 14px rgba(0,0,0,.18);
 }
-.app-alt-tag { font-size: 13px; font-weight: 700; color: var(--color-primary-dark); }
-.app-alt-title { font-family: var(--font-heading); font-size: 19px; margin: 6px 0 6px; }
-.app-alt-text { font-size: 14.5px; color: var(--text-secondary); margin-bottom: 14px; }
-.app-alt-btns { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
-.app-alt-btns .btn { flex: 1 1 180px; }
+.offer-sub { font-size: 14px; opacity: .9; margin: -8px 0 0; }
+.offer-diff { align-self: flex-start; background: rgba(252, 211, 77, .2); color: #fde68a; font-weight: 700; font-size: 13px; padding: 4px 10px; border-radius: 999px; margin-top: -6px; }
+.offer-demo { color: #fff; font-weight: 600; font-size: 14px; text-decoration: underline; text-underline-offset: 3px; padding: 4px; background: none; border: 0; cursor: pointer; }
+.offer-card--planilha { background: var(--surface); color: var(--text-primary, #10201f); box-shadow: var(--shadow-md); border: 1.5px solid rgba(0,0,0,.08); }
+.offer-card--planilha .offer-includes li svg { color: var(--color-primary); }
+.offer-card--planilha .guarantee-strip { background: var(--color-primary-bg); color: var(--color-primary-dark); }
+.offer-card--planilha .offer-sub { color: var(--text-secondary); opacity: 1; }
+.offer-card .btn { width: 100%; }
+.offer-note { text-align: center; display: block; }
+
+/* Página de vendas: comparação e destaque do app */
+.compare-card--sales { color: var(--text-primary); margin: 6px 0 26px; }
+.price-diff { align-self: flex-start; background: #fef3c7; color: #92400e; font-weight: 700; font-size: 12.5px; padding: 4px 10px; border-radius: 999px; }
+
+/* Destaque do acesso vitalício */
+.offer-destaque { background: rgba(252, 211, 77, .16); border-radius: 10px; padding: 8px 10px; margin: 0 -10px; }
+.offer-destaque strong { color: #fde68a; }
+.price-destaque { background: #fef3c7; border-radius: 10px; padding: 8px 10px; margin: 0 -10px; }
+.price-destaque strong { color: #92400e; }

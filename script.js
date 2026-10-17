@@ -219,6 +219,10 @@
   /* =========================================================
      TELA 3 — RESULTADO + OFERTA
      ========================================================= */
+  function compareRow(item, planilha, app) {
+    var marca = function (v, cls) { return '<td class="' + cls + (v === '—' ? ' no' : '') + '">' + v + '</td>'; };
+    return '<tr><th scope="row">' + item + '</th>' + marca(planilha, 'col-plan') + marca(app, 'col-app') + '</tr>';
+  }
   function checkIcon() {
     return '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 13L9.5 17.5L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   }
@@ -270,7 +274,7 @@
             ? 'Entre em 2027 com esse primeiro passo já dado.'
             : 'Transforme esse primeiro passo em uma organização que você consegue acompanhar.') +
         '</h2>' +
-        '<p class="offer-lead">A <strong>Planilha de Organização Financeira</strong> é uma planilha pronta no Google Planilhas para registrar o que entra e o que sai e acompanhar o seu mês em um só lugar. É a estrutura que as ações acima pedem, sem você precisar montar do zero.</p>' +
+        '<p class="offer-lead">Você pode fazer isso de dois jeitos: com a <strong>Planilha de Organização Financeira</strong>, pronta no Google Planilhas, ou com o <strong>app no celular</strong>, que registra o que entra e o que sai e faz as contas sozinho. Os dois são a estrutura que as ações acima pedem, sem você precisar montar do zero.</p>' +
 
         '<figure class="demo-video">' +
           '<video controls playsinline preload="metadata" poster="assets/video/tutorial-poster.jpg" width="900" height="434">' +
@@ -292,40 +296,68 @@
           '</ul>' +
         '</div>' +
 
-        '<div class="offer-card">' +
-          '<span class="offer-title">Planilha de Organização Financeira</span>' +
+        /* Comparação rápida: o app faz tudo da planilha e mais. */
+        '<div class="compare-card">' +
+          '<h3 class="compare-title">Planilha ou app? Veja a diferença</h3>' +
+          '<table class="compare">' +
+            '<thead><tr><th></th><th>Planilha</th><th class="col-app">App ⭐</th></tr></thead>' +
+            '<tbody>' +
+              compareRow('Entradas, gastos, contas e metas', '✓', '✓') +
+              compareRow('“Restante para gastar” e gráficos', '✓', '✓') +
+              compareRow('Lançar em segundos no celular, até falando', '—', '✓') +
+              compareRow('Faturas do cartão e parcelas automáticas', '—', '✓') +
+              compareRow('Cofrinhos, orçamentos e dicas do mês', 'Metas', '✓') +
+              compareRow('Lembretes de contas no celular', '—', '✓') +
+              compareRow('Funciona sem internet', '—', '✓') +
+              compareRow('Acesso vitalício, sem mensalidade', '✓', '✓') +
+              compareRow('Preço (pagamento único)', 'R$17', 'R$27') +
+            '</tbody>' +
+          '</table>' +
+        '</div>' +
+
+        /* Oferta 1 (destaque): o app no celular, R$27 */
+        '<div class="offer-card offer-card--app">' +
+          '<span class="offer-badge">⭐ Mais vantajoso</span>' +
+          '<span class="offer-title">📱 App Organização Financeira</span>' +
+          '<p class="offer-sub">Tudo o que a planilha faz, no seu celular e com as contas feitas sozinhas.</p>' +
+          '<div class="offer-price-row">' +
+            '<span class="offer-price-new">R$27</span>' +
+            '<span class="offer-price-meta">pagamento único</span>' +
+          '</div>' +
+          '<span class="offer-diff">Só R$10 a mais que a planilha</span>' +
+          '<ul class="offer-includes">' +
+            '<li class="offer-destaque">' + checkIcon() + ' <span><strong>Acesso vitalício, sem mensalidade:</strong> paga uma vez e usa para sempre, com todas as atualizações</span></li>' +
+            '<li>' + checkIcon() + ' App para iPhone e Android: instala na tela inicial e funciona até sem internet</li>' +
+            '<li>' + checkIcon() + ' Lança um gasto em segundos, até falando: “gastei 45 no ifood no crédito”</li>' +
+            '<li>' + checkIcon() + ' Faturas do cartão e parcelas calculadas sozinhas</li>' +
+            '<li>' + checkIcon() + ' Cofrinhos com prazo, orçamentos e dicas do mês</li>' +
+            '<li>' + checkIcon() + ' Lembretes das contas a vencer no celular</li>' +
+            '<li>' + checkIcon() + ' <span>Suporte por e-mail e WhatsApp<br><a class="offer-link" href="mailto:suporteplanilhass@gmail.com">suporteplanilhass@gmail.com</a></span></li>' +
+          '</ul>' +
+          '<div class="guarantee-strip">🛡️ Garantia incondicional de 7 dias: não gostou por qualquer motivo, é só pedir o reembolso</div>' +
+          '<button class="btn btn-gold btn-large btn-pulse-gold" id="appBuyBtn" type="button">Quero o app por R$27' + arrowIcon() + '</button>' +
+          '<button class="offer-demo" id="appDemoBtn" type="button">👀 Experimentar o app grátis antes</button>' +
+        '</div>' +
+
+        /* Oferta 2: a planilha, R$17 */
+        '<div class="offer-card offer-card--planilha">' +
+          '<span class="offer-title">📊 Planilha de Organização Financeira</span>' +
+          '<p class="offer-sub">No Google Planilhas, para quem prefere usar no computador.</p>' +
           '<div class="offer-price-row">' +
             '<span class="offer-price-new">R$17</span>' +
             '<span class="offer-price-meta">pagamento único</span>' +
           '</div>' +
           '<ul class="offer-includes">' +
-            '<li>' + checkIcon() + ' Incluso nos R$17: a Planilha de Organização Financeira (produto digital)</li>' +
-            '<li>' + checkIcon() + ' Incluso: o tutorial em vídeo de como fazer sua cópia e preencher o mês</li>' +
+            '<li>' + checkIcon() + ' A Planilha de Organização Financeira (produto digital)</li>' +
+            '<li>' + checkIcon() + ' Tutorial em vídeo de como fazer sua cópia e preencher o mês</li>' +
             '<li>' + checkIcon() + ' Feita no Google Planilhas: você faz uma cópia para o seu Google Drive e usa no computador ou no celular, pelo app do Google Planilhas</li>' +
             '<li>' + checkIcon() + ' <span>Suporte por e-mail e WhatsApp<br><a class="offer-link" href="mailto:suporteplanilhass@gmail.com">suporteplanilhass@gmail.com</a></span></li>' +
-            '<li>' + checkIcon() + ' Pagamento por Pix ou cartão de crédito</li>' +
-            '<li>' + checkIcon() + ' Acesso liberado pela plataforma após a confirmação do pagamento</li>' +
           '</ul>' +
           '<div class="guarantee-strip">🛡️ Garantia incondicional de 7 dias: não gostou por qualquer motivo, é só pedir o reembolso</div>' +
+          '<button class="btn btn-outline btn-large" id="finalCtaBtn" type="button">Quero a planilha por R$17</button>' +
         '</div>' +
 
-        '<div class="final-cta-wrap">' +
-          '<button class="btn btn-primary btn-large btn-pulse" id="finalCtaBtn" type="button">' +
-            'Quero minha planilha por R$17' + arrowIcon() +
-          '</button>' +
-          '<span class="final-cta-note">Acesso imediato após a confirmação do pagamento</span>' +
-        '</div>' +
-
-        /* Alternativa: o app no celular (R$27). A demo abre em outra aba. */
-        '<div class="app-alt">' +
-          '<span class="app-alt-tag">📱 Prefere usar no celular?</span>' +
-          '<h3 class="app-alt-title">Também tem o app, por R$27</h3>' +
-          '<p class="app-alt-text">Instala na tela inicial e faz as contas sozinho: lança gastos até falando, organiza as faturas do cartão, tem cofrinhos para suas metas e lembra das contas que vão vencer.</p>' +
-          '<div class="app-alt-btns">' +
-            '<button class="btn btn-outline" id="appDemoBtn" type="button">👀 Experimentar grátis</button>' +
-            '<button class="btn btn-primary" id="appBuyBtn" type="button">Quero o app por R$27</button>' +
-          '</div>' +
-        '</div>' +
+        '<p class="final-cta-note offer-note">Acesso imediato após a confirmação do pagamento. Pix ou cartão de crédito.</p>' +
       '</section>' +
 
       '<div class="result-footer">' +

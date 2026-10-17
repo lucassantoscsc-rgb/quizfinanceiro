@@ -33,10 +33,8 @@ window.Funnel = (function () {
     app: {
       nome: 'App Organização Financeira',
       valor: 27,
-      /* TODO: colar aqui o link do checkout da Cakto do produto
-         "Organização Financeira - App no Celular".
-         Enquanto estiver vazio, os botões do app ficam desativados. */
-      url: ''
+      /* Checkout da Cakto do produto "Organização Financeira - App no Celular". */
+      url: 'https://pay.cakto.com.br/3drwm4z_1213020'
     }
   };
 

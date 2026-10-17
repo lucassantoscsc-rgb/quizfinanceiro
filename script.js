@@ -315,6 +315,17 @@
           '</button>' +
           '<span class="final-cta-note">Acesso imediato após a confirmação do pagamento</span>' +
         '</div>' +
+
+        /* Alternativa: o app no celular (R$27). A demo abre em outra aba. */
+        '<div class="app-alt">' +
+          '<span class="app-alt-tag">📱 Prefere usar no celular?</span>' +
+          '<h3 class="app-alt-title">Também tem o app, por R$27</h3>' +
+          '<p class="app-alt-text">Instala na tela inicial e faz as contas sozinho: lança gastos até falando, organiza as faturas do cartão, tem cofrinhos para suas metas e lembra das contas que vão vencer.</p>' +
+          '<div class="app-alt-btns">' +
+            '<button class="btn btn-outline" id="appDemoBtn" type="button">👀 Experimentar grátis</button>' +
+            '<button class="btn btn-primary" id="appBuyBtn" type="button">Quero o app por R$27</button>' +
+          '</div>' +
+        '</div>' +
       '</section>' +
 
       '<div class="result-footer">' +
@@ -324,6 +335,12 @@
     document.getElementById('finalCtaBtn').addEventListener('click', function () {
       Funnel.goToCheckout();
     });
+    document.getElementById('appDemoBtn').addEventListener('click', function () {
+      Funnel.openAppDemo({ cta_position: 'quiz-resultado' });
+    });
+    var appBuy = document.getElementById('appBuyBtn');
+    if (!Funnel.isOfferReady('app')) { appBuy.disabled = true; appBuy.title = 'Em breve'; }
+    else appBuy.addEventListener('click', function () { Funnel.goToCheckout('app', { cta_position: 'quiz-resultado' }); });
     document.getElementById('restartBtnResult').addEventListener('click', restart);
 
     var demoVideo = resultWrap.querySelector('.demo-video video');

@@ -1020,3 +1020,67 @@ ul { margin: 0; padding: 0; list-style: none; }
   .ticker-track li[aria-hidden="true"] { display: none; }
   .ticker-track li + li { border-left: none; }
 }
+
+
+/* =========================================================
+   APP NO CELULAR (oferta de R$27)
+   ========================================================= */
+.app-shots {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  margin: 8px 0 28px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 4px 4px 10px;
+  scrollbar-width: none;
+}
+.app-shots::-webkit-scrollbar { display: none; }
+.app-shots figure {
+  flex: 0 0 auto;
+  width: 190px;
+  margin: 0;
+  scroll-snap-align: center;
+  text-align: center;
+}
+.app-shots img {
+  width: 100%;
+  height: auto;
+  border-radius: 26px;
+  border: 6px solid #10201f;
+  box-shadow: var(--shadow-md);
+  display: block;
+  background: #10201f;
+}
+.app-shots figcaption { font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-top: 10px; }
+@media (max-width: 560px) {
+  .app-shots { justify-content: flex-start; margin-left: -16px; margin-right: -16px; padding-left: 16px; padding-right: 16px; }
+  .app-shots figure { width: 62%; }
+}
+.benefit-icon { font-size: 20px; }
+.app-demo-cta { display: flex; flex-direction: column; align-items: center; gap: 8px; margin-top: 26px; text-align: center; }
+.app-demo-cta span { font-size: 13px; color: var(--text-secondary); }
+.price-demo {
+  display: block;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-primary-dark);
+  margin-top: -2px;
+  padding: 6px;
+}
+
+/* Alternativa do app no resultado do quiz */
+.app-alt {
+  margin-top: 22px;
+  border: 1.5px dashed var(--color-primary);
+  border-radius: 18px;
+  padding: 18px;
+  background: var(--color-primary-bg);
+  text-align: center;
+}
+.app-alt-tag { font-size: 13px; font-weight: 700; color: var(--color-primary-dark); }
+.app-alt-title { font-family: var(--font-heading); font-size: 19px; margin: 6px 0 6px; }
+.app-alt-text { font-size: 14.5px; color: var(--text-secondary); margin-bottom: 14px; }
+.app-alt-btns { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.app-alt-btns .btn { flex: 1 1 180px; }

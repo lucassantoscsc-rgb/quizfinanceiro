@@ -30,14 +30,18 @@ window.Funnel = (function () {
       valor: 17,
       url: 'https://pay.cakto.com.br/o7zxmb3_786993'
     },
-    completo: {
-      nome: 'Planilha de Organização Financeira + extras',
+    app: {
+      nome: 'App Organização Financeira',
       valor: 27,
-      /* TODO: criar a oferta de R$27 na Cakto e colar o link aqui.
-         Enquanto estiver assim, o botão de R$27 fica desativado na página. */
+      /* TODO: colar aqui o link do checkout da Cakto do produto
+         "Organização Financeira - App no Celular".
+         Enquanto estiver vazio, os botões do app ficam desativados. */
       url: ''
     }
   };
+
+  /* Demonstração do app (sem login, dados de exemplo). */
+  var APP_DEMO_URL = 'https://organizacao-financeira-seven.vercel.app/demo';
 
   var DEFAULT_OFFER = 'essencial';
 
@@ -119,6 +123,12 @@ window.Funnel = (function () {
     isOfferReady: isOfferReady,
     buildCheckoutUrl: buildCheckoutUrl,
     trackEvent: trackEvent,
-    goToCheckout: goToCheckout
+    goToCheckout: goToCheckout,
+    APP_DEMO_URL: APP_DEMO_URL,
+    /* Abre a demonstração do app em outra aba e registra o clique. */
+    openAppDemo: function (payload) {
+      trackEvent('app_demo_click', payload || {});
+      window.open(APP_DEMO_URL, '_blank', 'noopener');
+    }
   };
 })();

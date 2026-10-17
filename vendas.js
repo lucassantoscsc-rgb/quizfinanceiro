@@ -8,6 +8,7 @@
      offer_view      quando o bloco de ofertas entra na tela
      demo_video_play primeiro play do vídeo
      checkout_click  clique de compra (com offer e cta_position)
+     app_demo_click  clique para experimentar a demonstração do app
    ========================================================= */
 (function () {
   'use strict';
@@ -33,6 +34,15 @@
 
     btn.addEventListener('click', function () {
       Funnel.goToCheckout(oferta, { cta_position: btn.dataset.cta });
+    });
+  });
+
+  /* --- Demonstração do app -------------------------------------
+     Qualquer elemento com data-app-demo abre a demo em outra aba. */
+  Array.prototype.forEach.call(document.querySelectorAll('[data-app-demo]'), function (el) {
+    el.addEventListener('click', function (e) {
+      e.preventDefault();
+      Funnel.openAppDemo({ cta_position: el.dataset.appDemo });
     });
   });
 

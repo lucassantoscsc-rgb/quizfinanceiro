@@ -1136,3 +1136,20 @@ ul { margin: 0; padding: 0; list-style: none; }
 .app-live-note { font-size: 13px; color: var(--text-secondary); max-width: 320px; }
 .app-live--quiz { background: var(--surface); border-radius: var(--radius-lg); padding: 18px 12px; box-shadow: var(--shadow-sm); margin: 0; }
 .link-tela-cheia { font-size: 13.5px; font-weight: 600; color: var(--color-primary-dark); text-decoration: underline; text-underline-offset: 3px; }
+
+/* Barra fixa de compra do app (celular) */
+.barra-compra {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 10px 14px calc(10px + env(safe-area-inset-bottom, 0px));
+  background: rgba(6, 64, 46, .97); color: #fff;
+  box-shadow: 0 -8px 24px rgba(0,0,0,.18);
+  transform: translateY(110%); transition: transform .28s ease;
+}
+.barra-compra.on { transform: translateY(0); }
+.barra-texto { display: flex; flex-direction: column; line-height: 1.25; min-width: 0; }
+.barra-texto strong { font-size: 14.5px; white-space: nowrap; }
+.barra-texto span { font-size: 12px; opacity: .85; }
+.barra-compra .btn { flex: none; padding: 11px 18px; font-size: 14.5px; width: auto; }
+body.com-barra { padding-bottom: 72px; }
+@media (min-width: 761px) { .barra-compra { display: none; } }

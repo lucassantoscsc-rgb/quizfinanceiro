@@ -153,6 +153,58 @@ window.Funnel = (function () {
         });
       });
     },
+    /* Barra fixa de compra do app (só no celular).
+       Aparece depois que 'depoisDe' sai da tela e some enquanto algum elemento
+       de 'esconderEm' (ex.: os cards de oferta) estiver visível. */
+    barraFixa: function (opcoes) {
+      if (!isOfferReady('app')) return;
+      var barra = document.getElementById('barraCompra');
+      if (!barra) {
+        barra = document.createElement('div');
+        barra.id = 'barraCompra';
+        barra.className = 'barra-compra';
+        barra.setAttribute('aria-hidden', 'true');
+        barra.innerHTML =
+          '<div class="barra-texto"><strong>📱 App no celular · R$27</strong><span>Vitalício, sem mensalidade</span></div>' +
+          '<button class="btn btn-gold" type="button" tabindex="-1">Quero o app</button>';
+        document.body.appendChild(barra);
+        barra.querySelector('button').addEventListener('click', function () {
+          goToCheckout('app', { cta_position: 'barra-fixa' });
+        });
+      }
+      var visivelNaTela = function (el) {
+        if (!el || !el.offsetParent) return false;
+        var r = el.getBoundingClientRect();
+        return r.bottom > 0 && r.top < window.innerHeight;
+      };
+      var atualizar = function () {
+        var gatilho = typeof opcoes.depoisDe === 'function' ? opcoes.depoisDe() : document.querySelector(opcoes.depoisDe);
+        var passou = gatilho && gatilho.offsetParent && gatilho.getBoundingClientRect().bottom < 0;
+        var conflito = (opcoes.esconderEm || []).some(function (sel) {
+          return Array.prototype.some.call(document.querySelectorAll(sel), visivelNaTela);
+        });
+        var mostrar = !!passou && !conflito && window.innerWidth <= 760;
+        barra.classList.toggle('on', mostrar);
+        barra.setAttribute('aria-hidden', mostrar ? 'false' : 'true');
+        barra.querySelector('button').tabIndex = mostrar ? 0 : -1;
+        document.body.classList.toggle('com-barra', mostrar);
+      };
+      /* No máximo uma atualização a cada 100 ms durante a rolagem, e uma no final. */
+      var ultima = 0, pendente = null;
+      var noScroll = function () {
+        var agora = Date.now();
+        clearTimeout(pendente);
+        if (agora - ultima > 100) { ultima = agora; atualizar(); }
+        pendente = setTimeout(function () { barra._atualizar(); }, 120);
+      };
+      if (!barra.dataset.ouvindo) {
+        barra.dataset.ouvindo = '1';
+        window.addEventListener('scroll', noScroll, { passive: true });
+        window.addEventListener('resize', noScroll);
+      }
+      barra._atualizar = atualizar;
+      atualizar();
+    },
     /* Abre a demonstração do app em outra aba e registra o clique. */
     openAppDemo: function (payload) {
       trackEvent('app_demo_click', payload || {});

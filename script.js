@@ -95,6 +95,8 @@
     clearProgress();
     resultWrap.innerHTML = '';
     showScreen('intro');
+    var barra = document.getElementById('barraCompra');
+    if (barra && barra._atualizar) barra._atualizar();
   }
 
   /* =========================================================
@@ -423,6 +425,8 @@
     else appBuy.addEventListener('click', function () { Funnel.goToCheckout('app', { cta_position: 'quiz-resultado' }); });
     document.getElementById('restartBtnResult').addEventListener('click', restart);
     Funnel.ativarAppAoVivo(resultWrap);
+    /* Barra fixa do app no celular: depois do título do resultado, sumindo nos cards de oferta */
+    Funnel.barraFixa({ depoisDe: '.result-headline', esconderEm: ['.offer-card--app', '.offer-card--planilha'] });
 
     var demoVideo = resultWrap.querySelector('.demo-video video');
     if (demoVideo) {

@@ -49,6 +49,10 @@
 
   Funnel.ativarAppAoVivo();
 
+  /* Barra fixa de compra do app no celular: aparece depois do topo da página
+     e some só enquanto os cards de oferta estão na tela. */
+  Funnel.barraFixa({ depoisDe: '.sales-hero', esconderEm: ['#ofertas .pricing'] });
+
   /* --- Vídeo --------------------------------------------------- */
   var video = document.querySelector('.demo-video video');
   if (video) {

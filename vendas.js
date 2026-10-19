@@ -49,6 +49,19 @@
 
   Funnel.ativarAppAoVivo();
 
+  /* Botão "Experimentar" (página do app): rola até o celular e já liga a demonstração. */
+  Array.prototype.forEach.call(document.querySelectorAll('[data-experimentar]'), function (el) {
+    el.addEventListener('click', function (e) {
+      var alvo = document.querySelector(el.getAttribute('href'));
+      if (!alvo) return;
+      e.preventDefault();
+      Funnel.trackEvent('demo_cta_click', { cta_position: 'hero' });
+      alvo.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      var play = alvo.querySelector('.phone-play');
+      if (play) play.click();
+    });
+  });
+
   /* Barra fixa de compra do app no celular: aparece depois do topo da página
      e some só enquanto os cards de oferta estão na tela. */
   Funnel.barraFixa({ depoisDe: '.sales-hero', esconderEm: ['#ofertas .pricing'] });

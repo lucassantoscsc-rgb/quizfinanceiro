@@ -1369,3 +1369,7 @@ body.fundo-escuro .option-btn.is-dimmed { opacity: 0.35; }
   display: flex; flex-direction: column; align-items: center; gap: 4px; text-align: center;
 }
 .alt-planilha p { font-size: 14px; color: var(--text-secondary); max-width: 40ch; }
+.tino-marca { display: inline-flex; align-items: center; gap: 12px; margin-bottom: 18px; text-align: left; }
+.tino-marca img { width: 52px; height: 52px; border-radius: 14px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); }
+.tino-marca b { display: block; font-family: var(--font-heading); font-size: 19px; line-height: 1.15; color: #fff; }
+.tino-marca small { display: block; font-size: 12.5px; color: rgba(255, 255, 255, 0.75); }

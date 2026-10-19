@@ -419,7 +419,7 @@
             ? 'Entre em 2027 com esse primeiro passo já dado.'
             : 'Transforme esse primeiro passo em uma organização que você consegue acompanhar.') +
         '</h2>' +
-        '<p class="offer-lead">Você pode fazer isso de dois jeitos: com a <strong>Planilha de Organização Financeira</strong>, pronta no Google Planilhas, ou com o <strong>app no celular</strong>, que registra o que entra e o que sai e faz as contas sozinho. Os dois são a estrutura que as ações acima pedem, sem você precisar montar do zero.</p>' +
+        '<p class="offer-lead">Você pode fazer isso de dois jeitos: com a <strong>Planilha de Organização Financeira</strong>, pronta no Google Planilhas, ou com o <strong>Tino Finanças</strong>, nosso app no celular, que registra o que entra e o que sai e faz as contas sozinho. Os dois são a estrutura que as ações acima pedem, sem você precisar montar do zero.</p>' +
 
         '<figure class="demo-video">' +
           '<video controls playsinline preload="metadata" poster="assets/video/tutorial-poster.jpg" width="900" height="434">' +
@@ -477,7 +477,7 @@
         /* Oferta 1 (destaque): o app no celular, R$27 */
         '<div class="offer-card offer-card--app">' +
           '<span class="offer-badge">⭐ Mais vantajoso</span>' +
-          '<span class="offer-title">📱 App Organização Financeira</span>' +
+          '<span class="offer-title">📱 Tino Finanças · app no celular</span>' +
           '<p class="offer-sub">Tudo o que a planilha faz, no seu celular e com as contas feitas sozinhas.</p>' +
           '<div class="offer-price-row">' +
             '<span class="offer-price-new">R$27</span>' +

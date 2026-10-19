@@ -31,7 +31,7 @@ window.Funnel = (function () {
       url: 'https://pay.cakto.com.br/o7zxmb3_786993'
     },
     app: {
-      nome: 'App Organização Financeira',
+      nome: 'Tino Finanças (app)',
       valor: 27,
       /* Checkout da Cakto do produto "Organização Financeira - App no Celular". */
       url: 'https://pay.cakto.com.br/3drwm4z_1213020'
@@ -137,7 +137,7 @@ window.Funnel = (function () {
           var tela = el.querySelector('.phone');
           var f = document.createElement('iframe');
           f.src = APP_DEMO_URL + '?embed=1';
-          f.title = 'Demonstração do app Organização Financeira';
+          f.title = 'Demonstração do app Tino Finanças';
           tela.innerHTML = '';
           tela.appendChild(f);
           el.classList.add('ativo');
@@ -165,7 +165,7 @@ window.Funnel = (function () {
         barra.className = 'barra-compra';
         barra.setAttribute('aria-hidden', 'true');
         barra.innerHTML =
-          '<div class="barra-texto"><strong>📱 App no celular · R$27</strong><span>Vitalício, sem mensalidade</span></div>' +
+          '<div class="barra-texto"><strong>📱 Tino Finanças · R$27</strong><span>Vitalício, sem mensalidade</span></div>' +
           '<button class="btn btn-gold" type="button" tabindex="-1">Quero o app</button>';
         document.body.appendChild(barra);
         barra.querySelector('button').addEventListener('click', function () {

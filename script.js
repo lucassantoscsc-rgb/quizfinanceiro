@@ -257,6 +257,19 @@
       '</div>';
   }
 
+  /* Mensagens reais de clientes da planilha (só o primeiro nome, sem foto nem @). */
+  var DEPOIMENTOS = [["Kaique", "Comprei a planilha esses dias atrás e ela é muito boa. Estou conseguindo ter mais noção de quanto dinheiro eu posso gastar e saber quanto eu gastei durante o mês. Tamo junto!! 👏🚀"], ["Tiago", "Eu assisti mais vídeos e já tô entendendo melhor. Melhor coisa que eu fiz foi ter comprado, viu kkkk. Agora eu vou ter mais controle do meu dinheiro."], ["Lucas", "Comprei sua planilha, achei ela muito maneira, era exatamente o que eu tava procurando pra me organizar. Parabéns mesmo pelo trabalho. Agora é voar alto e gastar com consciência e controle."]];
+  function depoimentosHTML() {
+    return '<div class="deps-quiz">' +
+        '<span class="reco-tag">💬 Quem já comprou</span>' +
+        '<div class="deps">' + DEPOIMENTOS.map(function (d) {
+          return '<figure class="dep"><blockquote>“' + d[1] + '”</blockquote>' +
+            '<figcaption><span class="dep-av" aria-hidden="true">' + d[0].charAt(0) + '</span>' +
+            '<span><b>' + d[0] + '</b><small>Comprou a planilha · mensagem no Instagram</small></span></figcaption></figure>';
+        }).join('') + '</div>' +
+      '</div>';
+  }
+
   function compareRow(item, planilha, app) {
     var marca = function (v, cls) { return '<td class="' + cls + (v === '—' ? ' no' : '') + '">' + v + '</td>'; };
     return '<tr><th scope="row">' + item + '</th>' + marca(planilha, 'col-plan') + marca(app, 'col-app') + '</tr>';
@@ -345,6 +358,8 @@
           '</div>' +
           '<p class="app-live-note">É o app de verdade, com dados de exemplo. Toque, navegue e lance um gasto.</p>' +
         '</div>' +
+
+        depoimentosHTML() +
 
         /* Comparação rápida: o app faz tudo da planilha e mais. */
         '<div class="compare-card">' +

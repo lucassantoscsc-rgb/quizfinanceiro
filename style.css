@@ -1153,3 +1153,24 @@ ul { margin: 0; padding: 0; list-style: none; }
 .barra-compra .btn { flex: none; padding: 11px 18px; font-size: 14.5px; width: auto; }
 body.com-barra { padding-bottom: 72px; }
 @media (min-width: 761px) { .barra-compra { display: none; } }
+
+/* Depoimentos (mensagens reais de clientes) */
+.deps { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 6px 2px 14px; scrollbar-width: none; }
+.deps::-webkit-scrollbar { display: none; }
+.dep {
+  flex: 0 0 82%; max-width: 340px; scroll-snap-align: center; margin: 0;
+  background: var(--surface); border-radius: 18px; padding: 16px 16px 14px; box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(0,0,0,.05); display: flex; flex-direction: column; justify-content: space-between; gap: 12px;
+}
+.sales-section .dep { background: #fff; }
+.dep blockquote { margin: 0; font-size: 15px; line-height: 1.5; color: var(--text-primary); }
+.dep figcaption { display: flex; align-items: center; gap: 10px; }
+.dep-av {
+  width: 36px; height: 36px; border-radius: 50%; flex: none; display: grid; place-items: center;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark)); color: #fff; font-weight: 800;
+}
+.dep figcaption b { display: block; font-size: 14px; }
+.dep figcaption small { font-size: 12px; color: var(--text-secondary); }
+@media (min-width: 761px) { .dep { flex-basis: 300px; } }
+.deps-quiz { margin: 0; }
+.deps-quiz .reco-tag { margin: 0 0 8px 4px; }

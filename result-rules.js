@@ -36,6 +36,18 @@ window.QuizRules = (function () {
       ]
     },
     {
+      id: 'renda',
+      question: 'Qual é, mais ou menos, a sua renda por mês?',
+      nota: '🔒 Fica só no seu aparelho. Serve para calcular sua projeção.',
+      options: [
+        { emoji: '🪙', label: 'Até R$2 mil', value: 'ate2' },
+        { emoji: '💵', label: 'De R$2 mil a R$4 mil', value: '2a4' },
+        { emoji: '💰', label: 'De R$4 mil a R$7 mil', value: '4a7' },
+        { emoji: '💎', label: 'Acima de R$7 mil', value: 'mais7' },
+        { emoji: '🤐', label: 'Prefiro não dizer', value: 'nao_dizer' }
+      ]
+    },
+    {
       id: 'peso',
       question: 'O que mais pesa na sua organização?',
       options: [
@@ -74,19 +86,25 @@ window.QuizRules = (function () {
   var PRIORIDADE = {
     contas: {
       passo: 'colocar todas as suas contas em um só lugar',
+      titulo: 'Liste todas as contas fixas do mês',
       acao: 'Liste todas as contas fixas do mês (moradia, luz, internet, parcelas) com valor e data de vencimento. Só de ver tudo junto, você já sabe quanto do mês está comprometido.'
     },
     dividas: {
       passo: 'organizar o pagamento das dívidas',
+      titulo: 'Monte a lista das suas dívidas',
       acao: 'Anote cada dívida com valor total, parcela, juros e vencimento. Com a lista pronta, priorize as de juros mais altos e defina quanto cabe pagar por mês sem apertar as contas essenciais.'
     },
     reserva: {
       passo: 'começar uma reserva pequena e constante',
+      titulo: 'Separe um valor fixo assim que o dinheiro entrar',
+      tituloMesApertado: 'Feche as contas do mês antes da reserva',
       acao: 'Escolha um valor fixo que caiba no seu mês, mesmo que pequeno, e separe assim que o dinheiro entrar, antes de gastar. No começo, constância importa mais que o valor.',
       acaoMesApertado: 'Antes de definir a reserva, feche o mês: veja o que entra, o que é fixo e o que sobra de verdade. A reserva começa com o valor que sobrar dessa conta, mesmo que pequeno, separado assim que o dinheiro entrar.'
     },
     planejar: {
       passo: 'dar um destino ao dinheiro que sobra',
+      titulo: 'Dê um destino à sobra antes do mês começar',
+      tituloMesApertado: 'Descubra quanto sobra de verdade',
       acao: 'Defina para onde vai a sobra antes do mês começar: uma parte para reserva, uma para um objetivo e uma para gastos livres. Sem destino, a sobra tende a ser gasta sem perceber.',
       acaoMesApertado: 'Pelas suas respostas, a sobra ainda não é constante. Comece registrando entradas e saídas do mês para saber quanto realmente sobra. O planejamento vem depois desse número.'
     }
@@ -112,18 +130,22 @@ window.QuizRules = (function () {
   var PESO = {
     dividas: {
       rotulo: 'Dívidas e parcelas',
+      titulo: 'Some tudo o que está parcelado',
       acao: 'Some tudo que está parcelado ou em atraso. Saber o total e a data em que cada parcela termina ajuda a decidir o que priorizar.'
     },
     variaveis: {
       rotulo: 'Gastos variáveis',
+      titulo: 'Coloque um limite em compras e delivery',
       acao: 'Defina um limite mensal para compras e delivery e acompanhe ao longo do mês, não só no fim. É o gasto mais fácil de ajustar rápido.'
     },
     essenciais: {
       rotulo: 'Despesas essenciais altas',
+      titulo: 'Meça o tamanho exato da diferença',
       acao: 'Quando o essencial pesa muito em relação à renda, organizar ajuda a visualizar e planejar, mas não aumenta o que entra. Use o registro para saber o tamanho exato da diferença e avaliar ajustes ou fontes extras com calma.'
     },
     nao_sei: {
       rotulo: 'Ainda não identificado',
+      titulo: 'Registre todos os gastos por 30 dias',
       acao: 'Registre todos os gastos por 30 dias, sem julgar. No fim, agrupe por tipo. O que mais pesa costuma aparecer sozinho.'
     }
   };
@@ -136,6 +158,54 @@ window.QuizRules = (function () {
     rotina: 'Sua rotina já existe. Aproveite para revisar uma decisão por mês: um gasto para reduzir ou uma meta para ajustar.'
   };
 
+  var DIFICULDADE_TITULO = {
+    comecar: 'Comece hoje, com o mês atual',
+    esqueco: 'Marque 10 minutos fixos na semana',
+    complicado: 'Fique só no básico',
+    rotina: 'Revise uma decisão por mês'
+  };
+
+  /* Perfil financeiro: definido pelo fim do mês (P2) */
+  var PERFIL = {
+    falta: { emoji: '🔥', nome: 'Apagador de Incêndios', texto: 'Todo mês vira uma corrida para fechar as contas. A boa notícia: quando você enxerga o mês inteiro, os incêndios ficam previsíveis e param de pegar você de surpresa.' },
+    acaba: { emoji: '⚖️', nome: 'Equilibrista', texto: 'As contas fecham, mas sem folga nenhuma, e qualquer imprevisto desequilibra tudo. O seu jogo é abrir uma pequena margem e protegê-la.' },
+    sobra_sem_plano: { emoji: '🌱', nome: 'Quase Lá', texto: 'Já sobra dinheiro, e isso é mais do que muita gente consegue. O que falta não é dinheiro, é destino: com um plano simples, essa sobra começa a render.' },
+    guardo: { emoji: '🧭', nome: 'Estrategista', texto: 'Você já guarda dinheiro. O próximo nível é transformar isso em metas claras, com prazo e valor, para cada real ter uma função.' }
+  };
+
+  /* Nível de controle (0–100): soma simples e explicável das respostas */
+  var PONTOS = {
+    metodo: { nao_acompanho: 5, anotacoes: 14, app_sem_manter: 18, acompanho: 32 },
+    mes: { falta: 2, acaba: 12, sobra_sem_plano: 24, guardo: 36 },
+    peso: { nao_sei: 2, dividas: 5, essenciais: 8, variaveis: 12 },
+    dificuldade: { comecar: 3, complicado: 7, esqueco: 9, rotina: 18 }
+  };
+
+  /* Projeção: meio da faixa de renda × uma fatia realista para o perfil */
+  var RENDA_MEIO = { ate2: 1600, '2a4': 3000, '4a7': 5500, mais7: 9000 };
+  var FATIA = { falta: 0.03, acaba: 0.05, sobra_sem_plano: 0.10, guardo: 0.15 };
+
+  function nivel(answers) {
+    var total = 0;
+    Object.keys(PONTOS).forEach(function (k) { total += PONTOS[k][answers[k]] || 0; });
+    return Math.max(8, Math.min(96, total));
+  }
+
+  function rotuloNivel(n) {
+    if (n < 35) return 'Começando a construir o controle';
+    if (n < 60) return 'Base em construção';
+    if (n < 80) return 'Bom controle, com espaço para crescer';
+    return 'Controle avançado';
+  }
+
+  function projecao(answers) {
+    var meio = RENDA_MEIO[answers.renda];
+    var fatia = FATIA[answers.mes] || 0.05;
+    if (!meio) return { mensal: 100, anual: 1200, pct: null };
+    var mensal = Math.max(50, Math.round(meio * fatia / 50) * 50);
+    return { mensal: mensal, anual: mensal * 12, pct: Math.round(fatia * 100) };
+  }
+
   function isComplete(answers) {
     return QUESTIONS.every(function (q) { return !!answers[q.id]; });
   }
@@ -147,7 +217,20 @@ window.QuizRules = (function () {
 
     var acao1 = (mesApertado && prioridade.acaoMesApertado) ? prioridade.acaoMesApertado : prioridade.acao;
 
+    var titulo1 = (mesApertado && prioridade.tituloMesApertado) ? prioridade.tituloMesApertado : prioridade.titulo;
+    var n = nivel(answers);
+
     return {
+      perfil: PERFIL[answers.mes] || PERFIL.acaba,
+      nivel: n,
+      nivelRotulo: rotuloNivel(n),
+      projecao: projecao(answers),
+      mesApertado: mesApertado,
+      titulos: [
+        titulo1,
+        peso.titulo,
+        DIFICULDADE_TITULO[answers.dificuldade] || DIFICULDADE_TITULO.comecar
+      ],
       passo: prioridade.passo,
       resumo: [
         METODO[answers.metodo] || METODO.nao_acompanho,

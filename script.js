@@ -24,7 +24,7 @@
   var STORAGE_KEY = 'quizfinanceiro:progress';
 
   var state = {
-    screen: 'intro',       // 'intro' | 'quiz' | 'result'
+    screen: 'intro',       // 'intro' | 'quiz' | 'analise' | 'result'
     currentQuestion: 0,
     answers: {}
   };
@@ -45,7 +45,7 @@
       if (!raw) return null;
       var saved = JSON.parse(raw);
       if (!saved || typeof saved !== 'object') return null;
-      var validScreens = { intro: 1, quiz: 1, result: 1 };
+      var validScreens = { intro: 1, quiz: 1, analise: 1, result: 1 };
       if (!validScreens[saved.screen]) return null;
       var q = parseInt(saved.currentQuestion, 10);
       if (isNaN(q) || q < 0 || q >= QUESTIONS.length) q = 0;
@@ -70,6 +70,7 @@
   var screens = {
     intro: document.getElementById('screen-intro'),
     quiz: document.getElementById('screen-quiz'),
+    analise: document.getElementById('screen-analise'),
     result: document.getElementById('screen-result')
   };
 
@@ -85,11 +86,14 @@
       screens[key].classList.toggle('active', key === name);
     });
     topbar.hidden = name !== 'quiz';
+    /* Abertura, perguntas e análise no verde escuro; o resultado volta ao fundo claro */
+    document.body.classList.toggle('fundo-escuro', name !== 'result');
     state.screen = name;
     window.scrollTo(0, 0);
   }
 
   function restart() {
+    window.clearTimeout(analiseTimer);
     state.currentQuestion = 0;
     state.answers = {};
     clearProgress();
@@ -121,7 +125,7 @@
   function renderProgress(index) {
     var total = QUESTIONS.length;
     progressFill.style.width = ((index + 1) / total) * 100 + '%';
-    progressLabel.textContent = (index + 1) + ' de ' + total;
+    progressLabel.textContent = 'Pergunta ' + (index + 1) + ' de ' + total;
   }
 
   function buildQuestionHTML(q, savedValue) {
@@ -140,6 +144,7 @@
 
     return (
       '<h2 class="question-title">' + q.question + '</h2>' +
+      (q.nota ? '<p class="question-nota">' + q.nota + '</p>' : '') +
       '<div class="options-list">' + optionsHTML + '</div>'
     );
   }
@@ -203,17 +208,86 @@
     });
   }
 
+  /* Pausas curtas de incentivo depois de algumas perguntas (índice da pergunta
+     respondida → conteúdo). Só texto na tela, sem rastreamento das respostas. */
+  var PAUSAS = {
+    1: function (a) {
+      var aperto = a.mes === 'falta' || a.mes === 'acaba';
+      return aperto
+        ? { emoji: '🤝', titulo: 'Você não está sozinho', texto: 'Chegar ao fim do mês no aperto é muito comum, e a saída quase sempre começa pelo mesmo lugar: enxergar para onde o dinheiro vai. É isso que vamos montar para você.' }
+        : { emoji: '👏', titulo: 'Ótimo sinal', texto: 'Quem já tem alguma sobra está a poucos ajustes de fazer o dinheiro render de verdade. Vamos descobrir quais são os seus.' };
+    },
+    3: function () {
+      return { emoji: '👀', titulo: 'Seu perfil já está aparecendo', texto: 'Faltam só 2 perguntas para montar seu nível de controle, sua projeção de 12 meses e o seu primeiro passo.' };
+    }
+  };
+
+  function renderPausa(conteudo, depois) {
+    questionSlide.classList.add('slide-out-fwd');
+    window.setTimeout(function () {
+      questionSlide.classList.remove('slide-out-fwd');
+      questionSlide.innerHTML =
+        '<div class="pausa">' +
+          '<span class="pausa-emoji">' + conteudo.emoji + '</span>' +
+          '<h2 class="pausa-titulo">' + conteudo.titulo + '</h2>' +
+          '<p class="pausa-texto">' + conteudo.texto + '</p>' +
+          '<button class="btn btn-gold btn-large" type="button" id="pausaBtn">Continuar' + arrowIcon() + '</button>' +
+        '</div>';
+      questionSlide.classList.add('slide-in-fwd-start');
+      void questionSlide.offsetWidth;
+      window.setTimeout(function () { questionSlide.classList.remove('slide-in-fwd-start'); }, 20);
+      document.getElementById('pausaBtn').addEventListener('click', depois, { once: true });
+    }, 260);
+  }
+
   function advanceFromQuestion(index) {
     if (index < QUESTIONS.length - 1) {
       state.currentQuestion = index + 1;
       saveProgress();
-      renderQuestion(state.currentQuestion);
+      var proxima = function () { renderQuestion(state.currentQuestion); };
+      if (PAUSAS[index]) renderPausa(PAUSAS[index](state.answers), proxima);
+      else proxima();
       return;
     }
     Funnel.trackEvent('quiz_complete');
-    renderResult();
-    showScreen('result');
+    analisar();
+  }
+
+  /* Tela "Analisando suas respostas...": marca os itens um a um e abre o resultado.
+     Usa setTimeout (não requestAnimationFrame) para não travar em aba em segundo plano. */
+  var analiseTimer = null;
+  function analisar() {
+    showScreen('analise');
     saveProgress();
+    var itens = document.querySelectorAll('#analiseLista li');
+    var anel = document.getElementById('analiseAnel');
+    var pct = document.getElementById('analisePct');
+    var CIRC = 2 * Math.PI * 52;
+    itens.forEach(function (li) { li.classList.remove('feito', 'ativo'); });
+    anel.style.strokeDasharray = CIRC;
+    anel.style.strokeDashoffset = CIRC;
+    var passo = 0;
+    var total = itens.length;
+    function tick() {
+      if (state.screen !== 'analise') return;
+      if (passo > 0) itens[passo - 1].classList.replace('ativo', 'feito');
+      if (passo < total) itens[passo].classList.add('ativo');
+      var p = Math.round((passo / total) * 100);
+      pct.textContent = p + '%';
+      anel.style.strokeDashoffset = CIRC * (1 - passo / total);
+      if (passo >= total) {
+        analiseTimer = window.setTimeout(function () {
+          if (state.screen !== 'analise') return;
+          renderResult();
+          showScreen('result');
+          saveProgress();
+        }, 550);
+        return;
+      }
+      passo++;
+      analiseTimer = window.setTimeout(tick, 750);
+    }
+    tick();
   }
 
   restartBtnTop.addEventListener('click', restart);
@@ -288,27 +362,47 @@
       return (
         '<li class="action-item">' +
           '<span class="action-num">' + (i + 1) + '</span>' +
-          '<p>' + texto + '</p>' +
+          '<div><strong class="action-titulo">' + r.titulos[i] + '</strong>' +
+          '<p>' + texto + '</p></div>' +
         '</li>'
       );
     }).join('');
 
+    var proj = r.projecao;
+    var projHTML =
+      '<div class="result-card proj-card">' +
+        '<span class="reco-tag">📈 Sua projeção de 12 meses</span>' +
+        '<p class="proj-frase">' + (r.mesApertado ? 'Abrindo uma folga de ' : 'Guardando ') + '<strong>' + reais(proj.mensal) + ' por mês</strong>' +
+          (proj.pct ? ' (cerca de ' + proj.pct + '% da sua renda)' : '') + ', em 1 ano você teria:</p>' +
+        '<strong class="proj-valor">' + reais(proj.anual) + '</strong>' +
+        '<div class="proj-barras" aria-hidden="true">' + barrasProjecao() + '</div>' +
+        '<p class="proj-nota">' + (proj.pct ? 'Simulação simples a partir da faixa de renda que você indicou, sem juros nem rendimentos.' : 'Exemplo com R$100 por mês, já que você preferiu não informar a renda. Simulação simples, sem juros.') + '</p>' +
+      '</div>';
+
     resultWrap.innerHTML =
       /* ---------- Resultado ---------- */
-      '<div class="result-header">' +
-        '<span class="result-tag">Seu primeiro passo</span>' +
-        '<h1 class="result-headline">Pelas suas respostas, seu primeiro passo pode ser <span class="hl">' + r.passo + '</span>.</h1>' +
+      '<div class="perfil-card">' +
+        '<span class="perfil-tag">Seu perfil financeiro</span>' +
+        '<span class="perfil-emoji" aria-hidden="true">' + r.perfil.emoji + '</span>' +
+        '<h1 class="result-headline perfil-nome">' + r.perfil.nome + '</h1>' +
+        '<p class="perfil-texto">' + r.perfil.texto + '</p>' +
+        '<div class="medidor" role="img" aria-label="Seu nível de controle hoje: ' + r.nivel + ' de 100">' +
+          '<svg viewBox="0 0 200 110" aria-hidden="true"><defs><linearGradient id="gGrad" x1="0" x2="1"><stop offset="0" stop-color="#fcd34d"/><stop offset="1" stop-color="#34d399"/></linearGradient></defs>' +
+            '<path d="M20 100 A80 80 0 0 1 180 100" class="g-track"/>' +
+            '<path d="M20 100 A80 80 0 0 1 180 100" class="g-fill" id="medidorFill"/></svg>' +
+          '<div class="medidor-num"><strong id="medidorNum">0</strong><span>/100</span></div>' +
+        '</div>' +
+        '<p class="medidor-rotulo">Seu nível de controle hoje: <b>' + r.nivelRotulo + '</b></p>' +
+        '<div class="perfil-passo"><span>🎯 Seu primeiro passo</span><b>' + r.passo.charAt(0).toUpperCase() + r.passo.slice(1) + '</b></div>' +
       '</div>' +
 
-      '<div class="result-card">' +
-        '<p>' + r.resumo + '</p>' +
-        '<span class="leak-chip">Ponto de atenção que você indicou: ' + r.atencao + '</span>' +
-      '</div>' +
+      projHTML +
 
       '<div class="result-card">' +
-        '<h2 class="actions-title">3 ações práticas para começar</h2>' +
+        '<h2 class="actions-title">Seu plano em 3 ações</h2>' +
         '<ol class="actions-list">' + acoesHTML + '</ol>' +
-        '<p class="actions-note">Isso é uma orientação inicial baseada no que você respondeu, não um diagnóstico definitivo. Você pode aplicar tudo isso sem comprar nada.</p>' +
+        '<span class="leak-chip">Ponto de atenção que você indicou: ' + r.atencao + '</span>' +
+        '<p class="actions-note">' + r.resumo + ' Isso é uma orientação inicial, não um diagnóstico definitivo, e você pode aplicar tudo sem comprar nada.</p>' +
       '</div>' +
 
       (SEASONAL.ativa
@@ -441,7 +535,7 @@
     document.getElementById('restartBtnResult').addEventListener('click', restart);
     Funnel.ativarAppAoVivo(resultWrap);
     /* Barra fixa do app no celular: depois do título do resultado, sumindo nos cards de oferta */
-    Funnel.barraFixa({ depoisDe: '.result-headline', esconderEm: ['.offer-card--app', '.offer-card--planilha'] });
+    Funnel.barraFixa({ depoisDe: '.perfil-card', esconderEm: ['.offer-card--app', '.offer-card--planilha'] });
 
     var demoVideo = resultWrap.querySelector('.demo-video video');
     if (demoVideo) {
@@ -451,6 +545,37 @@
     }
 
     observeOfferView();
+    animarMedidor(r.nivel);
+  }
+
+  function reais(v) {
+    return 'R$' + v.toLocaleString('pt-BR');
+  }
+
+  /* 12 barrinhas crescendo: só ilustra o acúmulo mês a mês */
+  function barrasProjecao() {
+    var h = '';
+    for (var m = 1; m <= 12; m++) h += '<i style="height:' + Math.round(14 + (m / 12) * 86) + '%"></i>';
+    return h;
+  }
+
+  /* Medidor: preenche o arco e conta até a nota (setTimeout, sem rAF) */
+  function animarMedidor(nota) {
+    var fill = document.getElementById('medidorFill');
+    var num = document.getElementById('medidorNum');
+    if (!fill || !num) return;
+    var COMP = Math.PI * 80;
+    fill.style.strokeDasharray = COMP;
+    fill.style.strokeDashoffset = COMP;
+    void fill.getBoundingClientRect();
+    window.setTimeout(function () { fill.style.strokeDashoffset = COMP * (1 - nota / 100); }, 60);
+    var atual = 0;
+    var passo = Math.max(1, Math.round(nota / 30));
+    (function conta() {
+      atual = Math.min(nota, atual + passo);
+      num.textContent = atual;
+      if (atual < nota) window.setTimeout(conta, 30);
+    })();
   }
 
   /* offer_view: uma vez por resultado, quando a oferta entra na tela */
@@ -490,7 +615,7 @@
     if (saved.screen === 'quiz') {
       showScreen('quiz');
       renderQuestion(state.currentQuestion, true);
-    } else if (saved.screen === 'result' && window.QuizRules.isComplete(state.answers)) {
+    } else if ((saved.screen === 'result' || saved.screen === 'analise') && window.QuizRules.isComplete(state.answers)) {
       renderResult();
       showScreen('result');
     }

@@ -325,6 +325,30 @@ fbq('track', 'PageView');
     </div>
   </section>
 
+  <!-- ====================== LISTA DE ESPERA ======================
+       Valida o interesse no plano futuro com Open Finance (api/lista.js no app). -->
+  <section class="sales-section" id="conectado">
+    <div class="sales-inner">
+      <span class="section-tag">Em breve</span>
+      <h2 class="sales-h2">🏦 Tino Conectado</h2>
+      <p class="sales-text sales-text--center">Estamos estudando conectar o Tino ao seu banco pelo Open Finance: seus gastos e entradas entrariam sozinhos, sem digitar nada. Seria um plano opcional, com mensalidade. <strong>O app de R$27 continua vitalício, sem mensalidade.</strong></p>
+      <form class="lista-form" data-lista-form novalidate>
+        <label for="listaEmail">Seu e-mail</label>
+        <input id="listaEmail" type="email" inputmode="email" autocomplete="email" placeholder="seuemail@exemplo.com" required>
+        <span class="lista-label">Quanto você pagaria por mês por isso?</span>
+        <div class="lista-opcoes" role="radiogroup">
+          <button type="button" data-preco="ate10">Até R$9,90</button>
+          <button type="button" data-preco="ate15">Até R$14,90</button>
+          <button type="button" data-preco="ate20">Até R$19,90</button>
+          <button type="button" data-preco="mais20">Mais de R$20</button>
+          <button type="button" data-preco="nao">Não pagaria</button>
+        </div>
+        <button class="btn btn-primary btn-large" type="submit">Entrar na lista de espera</button>
+        <p class="lista-msg" role="status"></p>
+      </form>
+    </div>
+  </section>
+
   <!-- ====================== CTA FINAL ====================== -->
   <section class="sales-section sales-final">
     <div class="sales-inner">
@@ -354,5 +378,6 @@ fbq('track', 'PageView');
 
 <script src="funnel.js"></script>
 <script src="vendas.js"></script>
+<script src="lista.js"></script>
 </body>
 </html>

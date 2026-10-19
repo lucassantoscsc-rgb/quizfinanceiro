@@ -1346,3 +1346,26 @@ body.fundo-escuro .option-btn.is-dimmed { opacity: 0.35; }
 .action-item > div { display: flex; flex-direction: column; gap: 3px; }
 .action-titulo { font-family: var(--font-heading); font-size: 16px; color: var(--text-primary); }
 .action-item p { font-size: 14.5px !important; }
+
+/* =========================================================
+   PÁGINA SÓ DO APP (app.html)
+   ========================================================= */
+.app-live--hero { margin: 28px 0 4px; }
+.app-live-tag { font-size: 13.5px; font-weight: 700; color: #fcd34d; }
+.app-live--hero .app-live-note { color: rgba(255, 255, 255, 0.82); }
+.app-live--hero .link-tela-cheia { color: #a7f3d0; }
+.app-live--hero .phone { box-shadow: 0 26px 60px rgba(0, 0, 0, 0.4); }
+.pricing--single { grid-template-columns: 1fr !important; max-width: 440px; margin-left: auto; margin-right: auto; margin-top: 18px; }
+.passos { display: flex; flex-direction: column; gap: 14px; margin: 8px 0 0; padding: 0; list-style: none; }
+.passos li { display: flex; gap: 14px; align-items: flex-start; padding: 16px; border-radius: var(--radius-md); background: var(--bg); }
+.passos b {
+  flex: none; width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--color-primary); color: #fff; font-family: var(--font-heading);
+}
+.passos strong { display: block; font-family: var(--font-heading); font-size: 16px; }
+.passos span { font-size: 14.5px; color: var(--text-secondary); }
+.alt-planilha {
+  margin-top: 30px; padding-top: 22px; border-top: 1px solid var(--border);
+  display: flex; flex-direction: column; align-items: center; gap: 4px; text-align: center;
+}
+.alt-planilha p { font-size: 14px; color: var(--text-secondary); max-width: 40ch; }

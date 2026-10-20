@@ -447,7 +447,7 @@
         '<div class="app-live app-live--quiz" data-app-live="quiz-resultado">' +
           '<span class="reco-tag">📱 Experimente agora, sem cadastro</span>' +
           '<div class="phone">' +
-            '<img class="phone-poster" src="assets/app/app-resumo.jpg" alt="Tela inicial do app com o restante para gastar no mês" width="600" height="1298" loading="lazy">' +
+            '<img class="phone-poster" src="assets/app/app-resumo-v2.jpg" alt="Tela inicial do app com o quanto você pode gastar hoje" width="600" height="1298" loading="lazy">' +
             '<button class="phone-play" type="button">▶ Toque para experimentar</button>' +
           '</div>' +
           '<p class="app-live-note">É o app de verdade, com dados de exemplo. Toque, navegue e lance um gasto.</p>' +

@@ -1384,3 +1384,16 @@ body.fundo-escuro .option-btn.is-dimmed { opacity: 0.35; }
 .lista-opcoes button.on { background: var(--color-primary); color: #fff; }
 .lista-msg { font-size: 13.5px; color: var(--text-secondary); text-align: center; min-height: 1em; }
 .lista-ok { font-size: 15.5px; font-weight: 600; color: var(--color-primary-dark); text-align: center; margin: 6px 0; }
+
+/* ===== Indique e ganhe (indique.js): faixa para quem chegou pelo convite de um cliente ===== */
+.indique-faixa {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px 14px;
+  padding: 10px 16px; background: #fcd34d; color: #0a3f2d;
+  font-family: var(--font-body); font-size: 14.5px; line-height: 1.35; text-align: center;
+  box-shadow: var(--shadow-sm);
+}
+.indique-faixa .indique-cupom { letter-spacing: .06em; }
+.indique-faixa button {
+  flex: none; padding: 7px 14px; border: 0; border-radius: var(--radius-pill);
+  background: #0a3f2d; color: #fff; font: 700 13px var(--font-body); cursor: pointer;
+}

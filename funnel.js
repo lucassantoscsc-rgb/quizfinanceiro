@@ -76,7 +76,11 @@ window.Funnel = (function () {
   function buildCheckoutUrl(offerKey) {
     var url = getOffer(offerKey).url;
     if (!url) return '';
-    var qs = getPassThroughParams().toString();
+    var params = getPassThroughParams();
+    /* Indique e ganhe (indique.js): o código de quem indicou vai no "sck", só para o app
+       e só se a campanha não usou esse campo. */
+    if (offerKey === 'app' && window.TinoRef && !params.has('sck')) params.set('sck', 'indica-' + window.TinoRef.c);
+    var qs = params.toString();
     if (!qs) return url;
     return url + (url.indexOf('?') > -1 ? '&' : '?') + qs;
   }

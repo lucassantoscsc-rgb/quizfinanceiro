@@ -12,6 +12,12 @@
   ],
   "rewrites": [
     {
+      "source": "/app",
+      "destination": "/app.html"
+    }
+  ],
+  "redirects": [
+    {
       "source": "/",
       "has": [
         {
@@ -19,11 +25,8 @@
           "value": "(www\\.)?tinofinancas\\.com\\.br"
         }
       ],
-      "destination": "/app.html"
-    },
-    {
-      "source": "/app",
-      "destination": "/app.html"
+      "destination": "/app",
+      "permanent": false
     }
   ]
 }

@@ -1,9 +1,9 @@
 /* =========================================================
    INDIQUE E GANHE — quem chega pelo convite de um cliente
    (tinofinancas.com.br/?ref=CODIGO ou planilhadeorganizacaofinanceira.online/app?ref=CODIGO)
-   vê quem indicou e o cupom de desconto. O código vai para o
-   checkout do app no campo "sck" (indica-CODIGO), para a compra
-   contar para quem indicou. Vale por 30 dias neste aparelho.
+   vê quem indicou e vai para a oferta de indicação (R$20, sem cupom).
+   O código vai no campo "sck" (indica-CODIGO), para a compra contar
+   para quem indicou. Vale por 30 dias neste aparelho.
    ========================================================= */
 (function () {
   'use strict';
@@ -34,13 +34,19 @@
     var f = document.createElement('div');
     f.className = 'indique-faixa';
     var quem = ref.nome ? '<b>' + ref.nome.replace(/[<>&"]/g, '') + '</b> te indicou o Tino' : 'Você foi indicado para o Tino';
-    f.innerHTML = '<span>🎁 ' + quem + '. Use o cupom <b class="indique-cupom">' + ref.cupom + '</b> no pagamento e pague <b>R$ 20</b> em vez de R$ 27.</span>' +
-      '<button type="button">Copiar cupom</button>';
-    f.querySelector('button').addEventListener('click', function (e) {
-      var b = e.currentTarget;
-      (navigator.clipboard ? navigator.clipboard.writeText(ref.cupom) : Promise.reject()).then(function () { b.textContent = 'Copiado ✓'; })
-        .catch(function () { b.textContent = ref.cupom; });
-    });
+    f.innerHTML = '<span>🎁 ' + quem + '. Seu desconto <b>já está aplicado</b>: você paga <b>R$ 20</b> em vez de R$ 27.</span>';
     document.body.insertBefore(f, document.body.firstChild);
+    trocarPrecos(document.body);
+    // a barra fixa de compra aparece depois: troca o preço nela também
+    new MutationObserver(function (ms) { ms.forEach(function (m) { m.addedNodes.forEach(function (n) { if (n.nodeType === 1) trocarPrecos(n); }); }); })
+      .observe(document.body, { childList: true, subtree: true });
   }
+
+  // Para quem veio pelo convite, o app custa R$20: troca "R$27" na página (botões, cartões, barra fixa e textos).
+  function trocarPrecos(raiz) {
+    var it = document.createTreeWalker(raiz, NodeFilter.SHOW_TEXT), nos = [], n;
+    while ((n = it.nextNode())) if (/R\$ ?27\b/.test(n.nodeValue) && !(n.parentNode.closest && n.parentNode.closest('.indique-faixa'))) nos.push(n);
+    nos.forEach(function (x) { x.nodeValue = x.nodeValue.replace(/R\$ ?27\b/g, 'R$20'); });
+  }
+
 })();

@@ -30,6 +30,12 @@ window.Funnel = (function () {
       valor: 17,
       url: 'https://pay.cakto.com.br/o7zxmb3_786993'
     },
+    /* Indique e ganhe: quem chega pelo convite de um cliente paga R$20 nesta oferta (sem precisar de cupom). */
+    indicacao: {
+      nome: 'Tino Finanças (app) · indicação',
+      valor: 20,
+      url: 'https://pay.cakto.com.br/39trom4'
+    },
     app: {
       nome: 'Tino Finanças (app)',
       valor: 27,
@@ -74,12 +80,14 @@ window.Funnel = (function () {
   }
 
   function buildCheckoutUrl(offerKey) {
+    // Convite de um cliente (indique.js): o app sai pela oferta de indicação, com o desconto já aplicado.
+    if (offerKey === 'app' && window.TinoRef) offerKey = 'indicacao';
     var url = getOffer(offerKey).url;
     if (!url) return '';
     var params = getPassThroughParams();
     /* Indique e ganhe (indique.js): o código de quem indicou vai no "sck", só para o app
        e só se a campanha não usou esse campo. */
-    if (offerKey === 'app' && window.TinoRef && !params.has('sck')) params.set('sck', 'indica-' + window.TinoRef.c);
+    if (offerKey === 'indicacao' && window.TinoRef && !params.has('sck')) params.set('sck', 'indica-' + window.TinoRef.c);
     var qs = params.toString();
     if (!qs) return url;
     return url + (url.indexOf('?') > -1 ? '&' : '?') + qs;

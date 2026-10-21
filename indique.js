@@ -1,6 +1,6 @@
 /* =========================================================
    INDIQUE E GANHE — quem chega pelo convite de um cliente
-   (planilhadeorganizacaofinanceira.online/app?ref=CODIGO)
+   (tinofinancas.com.br/?ref=CODIGO ou planilhadeorganizacaofinanceira.online/app?ref=CODIGO)
    vê quem indicou e o cupom de desconto. O código vai para o
    checkout do app no campo "sck" (indica-CODIGO), para a compra
    contar para quem indicou. Vale por 30 dias neste aparelho.

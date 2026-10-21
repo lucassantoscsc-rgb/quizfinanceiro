@@ -12,6 +12,16 @@
   ],
   "rewrites": [
     {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "tinofinancas.com.br"
+        }
+      ],
+      "destination": "/app.html"
+    },
+    {
       "source": "/app",
       "destination": "/app.html"
     }

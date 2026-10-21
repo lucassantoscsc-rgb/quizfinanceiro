@@ -16,7 +16,7 @@
       "has": [
         {
           "type": "host",
-          "value": "tinofinancas.com.br"
+          "value": "(www\\.)?tinofinancas\\.com\\.br"
         }
       ],
       "destination": "/app.html"

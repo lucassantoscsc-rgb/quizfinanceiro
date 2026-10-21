@@ -420,6 +420,10 @@
             : 'Transforme esse primeiro passo em uma organização que você consegue acompanhar.') +
         '</h2>' +
         '<p class="offer-lead">Você pode fazer isso de dois jeitos: com a <strong>Planilha de Organização Financeira</strong>, pronta no Google Planilhas, ou com o <strong>Tino Finanças</strong>, nosso app no celular, que registra o que entra e o que sai e faz as contas sozinho. Os dois são a estrutura que as ações acima pedem, sem você precisar montar do zero.</p>' +
+        '<div class="escolha-rapida" role="note">' +
+          '<p><span>📊</span><span><strong>Quer uma planilha?</strong> Escolha a de <strong>R$17</strong>. É um arquivo do Google Planilhas.</span></p>' +
+          '<p><span>📱</span><span><strong>Prefere um aplicativo no celular?</strong> Escolha o Tino, <strong>R$27</strong>. Não é planilha e não fica na App Store: você instala pelo navegador.</span></p>' +
+        '</div>' +
 
         '<figure class="demo-video">' +
           '<video controls playsinline preload="metadata" poster="assets/video/tutorial-poster.jpg" width="900" height="434">' +
@@ -478,7 +482,7 @@
         '<div class="offer-card offer-card--app">' +
           '<span class="offer-badge">⭐ Mais vantajoso</span>' +
           '<span class="offer-title">📱 Tino Finanças · app no celular</span>' +
-          '<p class="offer-sub">Tudo o que a planilha faz, no seu celular e com as contas feitas sozinhas.</p>' +
+          '<p class="offer-sub"><strong>Um aplicativo para o celular, não é planilha.</strong> Faz tudo o que a planilha faz, com as contas feitas sozinhas.</p>' +
           '<div class="offer-price-row">' +
             '<span class="offer-price-new">R$27</span>' +
             '<span class="offer-price-meta">pagamento único</span>' +
@@ -487,6 +491,7 @@
           '<ul class="offer-includes">' +
             '<li class="offer-destaque">' + checkIcon() + ' <span><strong>Acesso vitalício, sem mensalidade:</strong> paga uma vez e usa para sempre, com todas as atualizações</span></li>' +
             '<li>' + checkIcon() + ' App para iPhone e Android: instala na tela inicial e funciona até sem internet</li>' +
+            '<li>' + checkIcon() + ' Não precisa baixar na App Store nem na Play Store: você abre o link e instala pelo navegador</li>' +
             '<li>' + checkIcon() + ' Lança um gasto em segundos, até falando: “gastei 45 no ifood no crédito”</li>' +
             '<li>' + checkIcon() + ' Faturas do cartão e parcelas calculadas sozinhas</li>' +
             '<li>' + checkIcon() + ' Cofrinhos com prazo, orçamentos e dicas do mês</li>' +
@@ -496,12 +501,13 @@
           '<div class="guarantee-strip">🛡️ Garantia incondicional de 7 dias: não gostou por qualquer motivo, é só pedir o reembolso</div>' +
           '<button class="btn btn-gold btn-large btn-pulse-gold" id="appBuyBtn" type="button">Quero o app por R$27' + arrowIcon() + '</button>' +
           '<button class="offer-demo" id="appDemoBtn" type="button">👀 Experimentar o app grátis antes</button>' +
+          '<p class="offer-aviso">Queria uma planilha? Escolha a opção de R$17 logo abaixo.</p>' +
         '</div>' +
 
         /* Oferta 2: a planilha, R$17 */
         '<div class="offer-card offer-card--planilha">' +
           '<span class="offer-title">📊 Planilha de Organização Financeira</span>' +
-          '<p class="offer-sub">No Google Planilhas, para quem prefere usar no computador.</p>' +
+          '<p class="offer-sub"><strong>Um arquivo do Google Planilhas, não é aplicativo.</strong> Para quem prefere usar no computador.</p>' +
           '<div class="offer-price-row">' +
             '<span class="offer-price-new">R$17</span>' +
             '<span class="offer-price-meta">pagamento único</span>' +

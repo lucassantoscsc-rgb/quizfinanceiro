@@ -332,14 +332,15 @@
   }
 
   /* Mensagens reais de clientes da planilha (só o primeiro nome, sem foto nem @). */
-  var DEPOIMENTOS = [["Kaique", "Comprei a planilha esses dias atrás e ela é muito boa. Estou conseguindo ter mais noção de quanto dinheiro eu posso gastar e saber quanto eu gastei durante o mês. Tamo junto!! 👏🚀"], ["Tiago", "Eu assisti mais vídeos e já tô entendendo melhor. Melhor coisa que eu fiz foi ter comprado, viu kkkk. Agora eu vou ter mais controle do meu dinheiro."], ["Lucas", "Comprei sua planilha, achei ela muito maneira, era exatamente o que eu tava procurando pra me organizar. Parabéns mesmo pelo trabalho. Agora é voar alto e gastar com consciência e controle."]];
+  // [nome, texto, origem]. Só o primeiro nome, com autorização.
+  var DEPOIMENTOS = [["Jailson", "Eu estou adorando o app, muito bom. Vocês estão de parabéns. Já tentei várias planilhas, e nenhuma foi tão prática como este app.", "Usa o app Tino · mensagem para o suporte"], ["Kaique", "Comprei a planilha esses dias atrás e ela é muito boa. Estou conseguindo ter mais noção de quanto dinheiro eu posso gastar e saber quanto eu gastei durante o mês. Tamo junto!! 👏🚀"], ["Tiago", "Eu assisti mais vídeos e já tô entendendo melhor. Melhor coisa que eu fiz foi ter comprado, viu kkkk. Agora eu vou ter mais controle do meu dinheiro."], ["Lucas", "Comprei sua planilha, achei ela muito maneira, era exatamente o que eu tava procurando pra me organizar. Parabéns mesmo pelo trabalho. Agora é voar alto e gastar com consciência e controle."]];
   function depoimentosHTML() {
     return '<div class="deps-quiz">' +
         '<span class="reco-tag">💬 Quem já comprou</span>' +
         '<div class="deps">' + DEPOIMENTOS.map(function (d) {
-          return '<figure class="dep"><blockquote>“' + d[1] + '”</blockquote>' +
+          return '<figure class="dep' + (d[2] ? ' dep--app' : '') + '"><blockquote>“' + d[1] + '”</blockquote>' +
             '<figcaption><span class="dep-av" aria-hidden="true">' + d[0].charAt(0) + '</span>' +
-            '<span><b>' + d[0] + '</b><small>Comprou a planilha · mensagem no Instagram</small></span></figcaption></figure>';
+            '<span><b>' + d[0] + '</b><small>' + (d[2] || 'Comprou a planilha · mensagem no Instagram') + '</small></span></figcaption></figure>';
         }).join('') + '</div>' +
       '</div>';
   }
@@ -479,6 +480,7 @@
         '</div>' +
 
         /* Oferta 1 (destaque): o app no celular, R$27 */
+        '<p class="dep-destaque">“Já tentei várias planilhas, e nenhuma foi tão prática como este app.”<span>Jailson, usa o app Tino</span></p>' +
         '<div class="offer-card offer-card--app">' +
           '<span class="offer-badge">⭐ Mais vantajoso</span>' +
           '<span class="offer-title">📱 Tino Finanças · app no celular</span>' +

@@ -34,7 +34,7 @@
     var f = document.createElement('div');
     f.className = 'indique-faixa';
     var quem = ref.nome ? '<b>' + ref.nome.replace(/[<>&"]/g, '') + '</b> te indicou o Tino' : 'Você foi indicado para o Tino';
-    f.innerHTML = '<span>🎁 ' + quem + '. Seu desconto <b>já está aplicado</b>: você paga <b>R$ 20</b> em vez de R$ 27.</span>';
+    f.innerHTML = '<span>🎁 ' + quem + '. Seu desconto <b>já está aplicado</b>: você paga <b>R$ 20</b> em vez de R$ ' + precoApp() + '.</span>';
     document.body.insertBefore(f, document.body.firstChild);
     trocarPrecos(document.body);
     // a barra fixa de compra aparece depois: troca o preço nela também
@@ -42,11 +42,15 @@
       .observe(document.body, { childList: true, subtree: true });
   }
 
-  // Para quem veio pelo convite, o app custa R$20: troca "R$27" na página (botões, cartões, barra fixa e textos).
+  // Preço atual do app (black.js muda depois da Black Friday).
+  function precoApp() { return (window.TinoPrecos && window.TinoPrecos.app) || 27; }
+  // Para quem veio pelo convite, o app custa R$20: troca o preço do app na página (botões, cartões, barra fixa e
+  // textos), menos nas faixas (a do convite e a da Black Friday).
   function trocarPrecos(raiz) {
+    var re = new RegExp('R\\$ ?' + precoApp() + '\\b', 'g');
     var it = document.createTreeWalker(raiz, NodeFilter.SHOW_TEXT), nos = [], n;
-    while ((n = it.nextNode())) if (/R\$ ?27\b/.test(n.nodeValue) && !(n.parentNode.closest && n.parentNode.closest('.indique-faixa'))) nos.push(n);
-    nos.forEach(function (x) { x.nodeValue = x.nodeValue.replace(/R\$ ?27\b/g, 'R$20'); });
+    while ((n = it.nextNode())) if (new RegExp(re.source).test(n.nodeValue) && !(n.parentNode.closest && n.parentNode.closest('.indique-faixa, [data-sem-troca]'))) nos.push(n);
+    nos.forEach(function (x) { x.nodeValue = x.nodeValue.replace(re, 'R$20'); });
   }
 
 })();

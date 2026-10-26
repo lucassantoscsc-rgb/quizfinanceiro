@@ -1443,3 +1443,6 @@ html.black .sales-section--dark::before { background: radial-gradient(ellipse at
 html.black .price-card--featured { border-color: #e8b931; box-shadow: 0 18px 46px rgba(0, 0, 0, .35), 0 0 0 6px rgba(232, 185, 49, .16); }
 html.black .price-badge { background: linear-gradient(135deg, #f7d774, #d9a514); color: #0b0b0c; }
 .black-preco { margin: 6px 0 0; font-size: 13px; font-weight: 600; color: #8a6a00; background: #fdf4d3; border-radius: 8px; padding: 6px 10px; }
+
+/* Brinde da planilha no cartão do app */
+.price-brinde, .offer-brinde { display: flex; align-items: flex-start; gap: 8px; background: #fdf4d3; color: #6b5200; border-radius: 10px; padding: 8px 10px; font-size: 14px; }

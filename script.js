@@ -489,9 +489,10 @@
             '<span class="offer-price-new">R$27</span>' +
             '<span class="offer-price-meta">pagamento único</span>' +
           '</div>' +
-          '<span class="offer-diff">Só R$10 a mais que a planilha</span>' +
+          '<span class="offer-diff">🎁 A planilha vem de brinde</span>' +
           '<ul class="offer-includes">' +
             '<li class="offer-destaque">' + checkIcon() + ' <span><strong>Acesso vitalício, sem mensalidade:</strong> paga uma vez e usa para sempre, com todas as atualizações</span></li>' +
+            '<li class="offer-brinde">🎁 <span><strong>Brinde: a Planilha de Organização Financeira</strong> (vendida separada por R$17), para usar no computador ou imprimir</span></li>' +
             '<li>' + checkIcon() + ' App para iPhone e Android: instala na tela inicial e funciona até sem internet</li>' +
             '<li>' + checkIcon() + ' Não precisa baixar na App Store nem na Play Store: você abre o link e instala pelo navegador</li>' +
             '<li>' + checkIcon() + ' Lança um gasto em segundos, até falando: “gastei 45 no ifood no crédito”</li>' +

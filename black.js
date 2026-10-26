@@ -34,7 +34,7 @@
   function faixaBlack() {
     var r = function (v) { return 'R$' + v; };
     var txt = {
-      app: 'App por <b>' + r(PRECOS_AGORA.app) + '</b> até 30/11. A partir de 01/12, ' + r(PRECOS_DEPOIS.app.valor) + '.',
+      app: 'App por <b>' + r(PRECOS_AGORA.app) + '</b> + planilha de brinde até 30/11. A partir de 01/12, ' + r(PRECOS_DEPOIS.app.valor) + '.',
       planilha: 'Planilha por <b>' + r(PRECOS_AGORA.planilha) + '</b> até 30/11. A partir de 01/12, ' + r(PRECOS_DEPOIS.planilha.valor) + '.',
       ambos: 'Planilha <b>' + r(PRECOS_AGORA.planilha) + '</b> e app <b>' + r(PRECOS_AGORA.app) + '</b> até 30/11. A partir de 01/12, ' +
         r(PRECOS_DEPOIS.planilha.valor) + ' e ' + r(PRECOS_DEPOIS.app.valor) + '.',

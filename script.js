@@ -423,7 +423,7 @@
         '<p class="offer-lead">Você pode fazer isso de dois jeitos: com a <strong>Planilha de Organização Financeira</strong>, pronta no Google Planilhas, ou com o <strong>Tino Finanças</strong>, nosso app no celular, que registra o que entra e o que sai e faz as contas sozinho. Os dois são a estrutura que as ações acima pedem, sem você precisar montar do zero.</p>' +
         '<div class="escolha-rapida" role="note">' +
           '<p><span>📊</span><span><strong>Quer uma planilha?</strong> Escolha a de <strong>R$17</strong>. É um arquivo do Google Planilhas.</span></p>' +
-          '<p><span>📱</span><span><strong>Prefere um aplicativo no celular?</strong> Escolha o Tino, <strong>R$27</strong>. Não é planilha e não fica na App Store: você instala pelo navegador.</span></p>' +
+          '<p><span>📱</span><span><strong>Prefere um aplicativo no celular?</strong> Escolha o Tino, <strong>R$27</strong>. Não é planilha: no Android você baixa no Google Play e no iPhone instala pelo navegador.</span></p>' +
         '</div>' +
 
         '<figure class="demo-video">' +
@@ -494,7 +494,7 @@
             '<li class="offer-destaque">' + checkIcon() + ' <span><strong>Acesso vitalício, sem mensalidade:</strong> paga uma vez e usa para sempre, com todas as atualizações</span></li>' +
             '<li class="offer-brinde">🎁 <span><strong>Brinde: a Planilha de Organização Financeira</strong> (vendida separada por R$17), para usar no computador ou imprimir</span></li>' +
             '<li>' + checkIcon() + ' App para iPhone e Android: instala na tela inicial e funciona até sem internet</li>' +
-            '<li>' + checkIcon() + ' Não precisa baixar na App Store nem na Play Store: você abre o link e instala pelo navegador</li>' +
+            '<li>' + checkIcon() + ' No Android, baixe o Tino no Google Play e entre com o e-mail da compra, sem pagar mais nada. No iPhone, instala pelo navegador</li>' +
             '<li>' + checkIcon() + ' Lança um gasto em segundos, até falando: “gastei 45 no ifood no crédito”</li>' +
             '<li>' + checkIcon() + ' Faturas do cartão e parcelas calculadas sozinhas</li>' +
             '<li>' + checkIcon() + ' Cofrinhos com prazo, orçamentos e dicas do mês</li>' +

@@ -153,7 +153,7 @@ window.QuizRules = (function () {
   /* P5 — rotina (ação 3) */
   var DIFICULDADE = {
     comecar: 'Comece hoje com o mês atual, mesmo incompleto. Um registro simples já é um começo. Não espere o mês virar.',
-    esqueco: 'Escolha um horário fixo na semana (ex.: domingo à noite) para atualizar em 10 minutos. Uma rotina curta e marcada é mais fácil de manter.',
+    esqueco: 'Escolha um horário fixo na semana (ex.: domingo à noite) e coloque um alarme no celular para não esquecer. São 10 minutos para atualizar a semana. Uma rotina curta e marcada é mais fácil de manter.',
     complicado: 'Mantenha só o básico: entrada, saída e saldo. Se a ferramenta pede mais que isso no começo, simplifique.',
     rotina: 'Sua rotina já existe. Aproveite para revisar uma decisão por mês: um gasto para reduzir ou uma meta para ajustar.'
   };

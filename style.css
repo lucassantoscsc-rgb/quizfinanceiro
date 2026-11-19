@@ -1447,3 +1447,7 @@ html.black .price-badge { background: linear-gradient(135deg, #f7d774, #d9a514);
 
 /* Brinde da planilha no cartão do app */
 .price-brinde, .offer-brinde { display: flex; align-items: flex-start; gap: 8px; background: #fdf4d3; color: #6b5200; border-radius: 10px; padding: 8px 10px; font-size: 14px; }
+
+/* Primeiro botão de compra, dentro do cartão "Como a planilha ajuda" */
+.reco-card .cta-cedo { margin-top: 14px; }
+.reco-card .cta-cedo .btn { width: 100%; }

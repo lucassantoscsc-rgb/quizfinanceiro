@@ -295,6 +295,47 @@
   /* =========================================================
      TELA 3 — RESULTADO + OFERTA
      ========================================================= */
+  /* Como a planilha ajuda, a partir das respostas (até 3). Só recursos que a planilha
+     tem de verdade (nada de lembrete ou notificação). Fica só na tela: as respostas
+     nunca vão para o rastreamento. */
+  function recomendacaoPlanilha(r) {
+    r = r || {};
+    var DIF = {
+      comecar: '🤔 Você <strong>não sabe por onde começar</strong>: a planilha já vem montada, com categorias prontas, e o tutorial em vídeo de 3 minutos mostra como fazer sua cópia e preencher o primeiro mês.',
+      esqueco: '⏰ Você disse que <strong>esquece de atualizar</strong>: na planilha, lançar a semana leva poucos minutos. Marque um alarme no celular para o seu horário fixo, e os totais e gráficos se ajustam sozinhos.',
+      complicado: '🧩 Você acha as ferramentas <strong>complicadas</strong>: na planilha você só digita o valor e escolhe a categoria e a forma de pagamento em menus prontos. As contas e os gráficos já estão montados.',
+      rotina: '🔁 Você já tem uma rotina: a planilha compara cada mês com o anterior, para você ver se as suas decisões estão dando resultado.'
+    };
+    var PESO = {
+      dividas: '💳 <strong>Dívidas e parcelas</strong> pesam para você: na parte de contas do mês você lança cada parcela com o valor planejado e o pago, e acompanha mês a mês o que já foi pago.',
+      variaveis: '🛍️ Os <strong>gastos com compras e delivery</strong> pesam: cada gasto entra com categoria, o gráfico mostra quanto foi para cada uma e o “Restante para gastar” mostra o que ainda cabe no mês.',
+      essenciais: '🏠 Suas <strong>despesas essenciais</strong> são altas: a planilha marca o que é essencial e compara, conta por conta, o que você planejou com o que realmente veio.',
+      nao_sei: '❓ Você <strong>não sabe o que mais pesa</strong>: o gráfico por categoria mostra para onde foi cada real do mês.'
+    };
+    var PRIO = {
+      dividas: PESO.dividas,
+      reserva: '🐷 Você quer <strong>começar uma reserva</strong>: a planilha tem a reserva de emergência com meta, quanto você separou no mês e quanto ainda falta.',
+      planejar: '🎯 Você quer <strong>planejar o que sobra</strong>: crie metas (ex.: viagem, carro) e veja quanto já juntou e quanto ainda falta.',
+      contas: '🗂️ Você quer <strong>organizar as contas</strong>: as contas do mês ficam todas juntas, com valor, data e o que já foi pago.'
+    };
+    var motivos = [];
+    var add = function (t) { if (t && motivos.indexOf(t) < 0 && motivos.length < 3) motivos.push(t); };
+    add(PRIO[r.prioridade]);
+    add(PESO[r.peso]);
+    if (r.metodo === 'app_sem_manter') add('📱 Você já tentou e <strong>não conseguiu manter</strong>: a planilha pede só o essencial (valor, categoria e forma de pagamento), e o resto ela calcula.');
+    add(DIF[r.dificuldade]);
+    if (!motivos.length) return '';
+    return '<div class="reco-card">' +
+        '<span class="reco-tag">💡 Pelo que você respondeu</span>' +
+        '<h3 class="reco-title">Como a planilha ajuda no seu caso</h3>' +
+        '<ul class="reco-list">' + motivos.map(function (m) { return '<li>' + m + '</li>'; }).join('') + '</ul>' +
+        '<div class="final-cta-wrap cta-cedo">' +
+          '<button class="btn btn-primary btn-large" id="ctaCedoBtn" type="button">Quero a planilha que organiza isso por R$17' + arrowIcon() + '</button>' +
+          '<span class="final-cta-note">Pagamento único. Garantia incondicional de 7 dias.</span>' +
+        '</div>' +
+      '</div>';
+  }
+
   /* Mensagens reais de clientes da planilha (só o primeiro nome, sem foto nem @). */
   // [nome, texto, origem]. Só o primeiro nome, com autorização.
   var DEPOIMENTOS = [["Kaique", "Comprei a planilha esses dias atrás e ela é muito boa. Estou conseguindo ter mais noção de quanto dinheiro eu posso gastar e saber quanto eu gastei durante o mês. Tamo junto!! 👏🚀"], ["Tiago", "Eu assisti mais vídeos e já tô entendendo melhor. Melhor coisa que eu fiz foi ter comprado, viu kkkk. Agora eu vou ter mais controle do meu dinheiro."], ["Lucas", "Comprei sua planilha, achei ela muito maneira, era exatamente o que eu tava procurando pra me organizar. Parabéns mesmo pelo trabalho. Agora é voar alto e gastar com consciência e controle."]];
@@ -366,6 +407,9 @@
         '<p class="actions-note">' + r.resumo + ' Isso é uma orientação inicial, não um diagnóstico definitivo, e você pode aplicar tudo sem comprar nada.</p>' +
       '</div>' +
 
+      /* Logo depois do plano: como a planilha ajuda no caso da pessoa + primeiro botão de compra */
+      recomendacaoPlanilha(state.answers) +
+
       (SEASONAL.ativa
         ? '<div class="season-card">' +
             '<span class="season-tag">📅 ' + SEASONAL.titulo + '</span>' +
@@ -431,9 +475,13 @@
     document.getElementById('finalCtaBtn').addEventListener('click', function () {
       Funnel.goToCheckout();
     });
+    var ctaCedo = document.getElementById('ctaCedoBtn');
+    if (ctaCedo) ctaCedo.addEventListener('click', function () {
+      Funnel.goToCheckout('essencial', { cta_position: 'quiz-apos-plano' });
+    });
     document.getElementById('restartBtnResult').addEventListener('click', restart);
     /* Barra fixa de compra da planilha no celular: depois do título do resultado, sumindo no card da oferta */
-    Funnel.barraFixa({ depoisDe: '.perfil-card', esconderEm: ['.offer-card--planilha'] });
+    Funnel.barraFixa({ depoisDe: '.perfil-card', esconderEm: ['.offer-card--planilha', '.cta-cedo'] });
 
     var demoVideo = resultWrap.querySelector('.demo-video video');
     if (demoVideo) {

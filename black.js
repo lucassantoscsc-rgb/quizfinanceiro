@@ -35,7 +35,7 @@
     var r = function (v) { return 'R$' + v; };
     var txt = {
       app: 'App por <b>' + r(PRECOS_AGORA.app) + '</b> + planilha de brinde até 30/11. A partir de 01/12, ' + r(PRECOS_DEPOIS.app.valor) + '.',
-      planilha: 'Planilha por <b>' + r(PRECOS_AGORA.planilha) + '</b> até 30/11. A partir de 01/12, ' + r(PRECOS_DEPOIS.planilha.valor) + '.',
+      planilha: 'Planilha de Organização Financeira por <b>' + r(PRECOS_AGORA.planilha) + '</b>, pagamento único.',
       ambos: 'Planilha <b>' + r(PRECOS_AGORA.planilha) + '</b> e app <b>' + r(PRECOS_AGORA.app) + '</b> até 30/11. A partir de 01/12, ' +
         r(PRECOS_DEPOIS.planilha.valor) + ' e ' + r(PRECOS_DEPOIS.app.valor) + '.',
       saida: 'Ofertas de Black Friday até 30/11.'
@@ -49,6 +49,9 @@
     // a faixa fica fixa no topo; o conteúdo desce a altura dela
     var ajustar = function () { document.body.style.paddingTop = f.offsetHeight + 'px'; };
     ajustar(); window.addEventListener('resize', ajustar);
+    // sem aviso de aumento de preço nem contagem regressiva (decisão de 19/11)
+    var rel = f.querySelector('.black-relogio'); if (rel) rel.remove();
+    return;
     // embaixo de cada preço: até quando vale e quanto passa a custar
     var depois = {}; depois[PRECOS_AGORA.app] = PRECOS_DEPOIS.app.valor; depois[PRECOS_AGORA.planilha] = PRECOS_DEPOIS.planilha.valor;
     document.querySelectorAll('.price-row').forEach(function (row) {

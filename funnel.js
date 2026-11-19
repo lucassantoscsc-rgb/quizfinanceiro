@@ -169,7 +169,8 @@ window.Funnel = (function () {
        Aparece depois que 'depoisDe' sai da tela e some enquanto algum elemento
        de 'esconderEm' (ex.: os cards de oferta) estiver visível. */
     barraFixa: function (opcoes) {
-      if (!isOfferReady('app')) return;
+      var oferta = opcoes.oferta || DEFAULT_OFFER;
+      if (!isOfferReady(oferta)) return;
       var barra = document.getElementById('barraCompra');
       if (!barra) {
         barra = document.createElement('div');
@@ -177,11 +178,11 @@ window.Funnel = (function () {
         barra.className = 'barra-compra';
         barra.setAttribute('aria-hidden', 'true');
         barra.innerHTML =
-          '<div class="barra-texto"><strong>📱 Tino Finanças · R$27</strong><span>Vitalício, sem mensalidade</span></div>' +
-          '<button class="btn btn-gold" type="button" tabindex="-1">Quero o app</button>';
+          '<div class="barra-texto"><strong>📊 Planilha · R$' + OFFERS[oferta].valor + '</strong><span>Pagamento único, garantia de 7 dias</span></div>' +
+          '<button class="btn btn-gold" type="button" tabindex="-1">Quero a planilha</button>';
         document.body.appendChild(barra);
         barra.querySelector('button').addEventListener('click', function () {
-          goToCheckout('app', { cta_position: 'barra-fixa' });
+          goToCheckout(oferta, { cta_position: 'barra-fixa' });
         });
       }
       var visivelNaTela = function (el) {

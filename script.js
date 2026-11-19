@@ -295,45 +295,9 @@
   /* =========================================================
      TELA 3 — RESULTADO + OFERTA
      ========================================================= */
-  /* Motivos para o app a partir das respostas (até 3). Fica só na tela: as respostas
-     nunca vão para o rastreamento. */
-  function recomendacaoApp(r) {
-    r = r || {};
-    var DIF = {
-      esqueco: '⏰ Você disse que <strong>esquece de atualizar</strong>: o app te lembra todo dia e deixa lançar um gasto em segundos, até falando.',
-      complicado: '🧩 Você acha as ferramentas <strong>complicadas</strong>: no app, lançar um gasto leva 3 toques, e um tutorial guiado mostra tudo no primeiro acesso.',
-      comecar: '🤔 Você <strong>não sabe por onde começar</strong>: o app tem um tutorial passo a passo e já vem com categorias e metas prontas.',
-      rotina: '🔁 Você já tem uma rotina: o app traz dicas automáticas, calendário e retrospectiva do mês para levar seu controle a outro nível.'
-    };
-    var PESO = {
-      dividas: '💳 <strong>Dívidas e parcelas</strong> pesam para você: o app mostra quando cada dívida termina, quanto de juros falta e monta um plano para quitar mais rápido.',
-      variaveis: '🛍️ Os <strong>gastos com compras e delivery</strong> pesam: o app avisa quando uma categoria passa do normal e encontra suas assinaturas.',
-      essenciais: '🏠 Suas <strong>despesas essenciais</strong> são altas: o app mostra quanto dá para gastar por dia e simula se uma compra cabe antes de você gastar.',
-      nao_sei: '❓ Você <strong>não sabe o que mais pesa</strong>: os gráficos do app mostram para onde vai cada real, e as dicas apontam o que está fora do normal.'
-    };
-    var PRIO = {
-      dividas: PESO.dividas,
-      reserva: '🐷 Você quer <strong>começar uma reserva</strong>: o app calcula a reserva ideal para você e mostra quanto guardar por mês.',
-      planejar: '🎯 Você quer <strong>planejar o que sobra</strong>: com os cofrinhos, você define objetivos e o app diz quanto guardar por mês para cada um.',
-      contas: '🗂️ Você quer <strong>organizar as contas</strong>: o app avisa as contas que vão vencer e copia as contas fixas para o mês seguinte.'
-    };
-    var motivos = [];
-    var add = function (t) { if (t && motivos.indexOf(t) < 0 && motivos.length < 3) motivos.push(t); };
-    add(DIF[r.dificuldade]);
-    if (r.metodo === 'app_sem_manter') add('📱 Você já tentou e <strong>não conseguiu manter</strong>: o app tem lembretes, sequência de dias e conquistas que ajudam a criar o hábito.');
-    add(PESO[r.peso]);
-    add(PRIO[r.prioridade]);
-    if (!motivos.length) return '';
-    return '<div class="reco-card">' +
-        '<span class="reco-tag">💡 Pelo que você respondeu</span>' +
-        '<h3 class="reco-title">O app combina mais com você</h3>' +
-        '<ul class="reco-list">' + motivos.map(function (m) { return '<li>' + m + '</li>'; }).join('') + '</ul>' +
-      '</div>';
-  }
-
   /* Mensagens reais de clientes da planilha (só o primeiro nome, sem foto nem @). */
   // [nome, texto, origem]. Só o primeiro nome, com autorização.
-  var DEPOIMENTOS = [["Jailson", "Eu estou adorando o app, muito bom. Vocês estão de parabéns. Já tentei várias planilhas, e nenhuma foi tão prática como este app.", "Usa o app Tino · mensagem para o suporte"], ["Kaique", "Comprei a planilha esses dias atrás e ela é muito boa. Estou conseguindo ter mais noção de quanto dinheiro eu posso gastar e saber quanto eu gastei durante o mês. Tamo junto!! 👏🚀"], ["Tiago", "Eu assisti mais vídeos e já tô entendendo melhor. Melhor coisa que eu fiz foi ter comprado, viu kkkk. Agora eu vou ter mais controle do meu dinheiro."], ["Lucas", "Comprei sua planilha, achei ela muito maneira, era exatamente o que eu tava procurando pra me organizar. Parabéns mesmo pelo trabalho. Agora é voar alto e gastar com consciência e controle."]];
+  var DEPOIMENTOS = [["Kaique", "Comprei a planilha esses dias atrás e ela é muito boa. Estou conseguindo ter mais noção de quanto dinheiro eu posso gastar e saber quanto eu gastei durante o mês. Tamo junto!! 👏🚀"], ["Tiago", "Eu assisti mais vídeos e já tô entendendo melhor. Melhor coisa que eu fiz foi ter comprado, viu kkkk. Agora eu vou ter mais controle do meu dinheiro."], ["Lucas", "Comprei sua planilha, achei ela muito maneira, era exatamente o que eu tava procurando pra me organizar. Parabéns mesmo pelo trabalho. Agora é voar alto e gastar com consciência e controle."]];
   function depoimentosHTML() {
     return '<div class="deps-quiz">' +
         '<span class="reco-tag">💬 Quem já comprou</span>' +
@@ -345,10 +309,6 @@
       '</div>';
   }
 
-  function compareRow(item, planilha, app) {
-    var marca = function (v, cls) { return '<td class="' + cls + (v === '—' ? ' no' : '') + '">' + v + '</td>'; };
-    return '<tr><th scope="row">' + item + '</th>' + marca(planilha, 'col-plan') + marca(app, 'col-app') + '</tr>';
-  }
   function checkIcon() {
     return '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 13L9.5 17.5L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   }
@@ -420,11 +380,7 @@
             ? 'Entre em 2027 com esse primeiro passo já dado.'
             : 'Transforme esse primeiro passo em uma organização que você consegue acompanhar.') +
         '</h2>' +
-        '<p class="offer-lead">Você pode fazer isso de dois jeitos: com a <strong>Planilha de Organização Financeira</strong>, pronta no Google Planilhas, ou com o <strong>Tino Finanças</strong>, nosso app no celular, que registra o que entra e o que sai e faz as contas sozinho. Os dois são a estrutura que as ações acima pedem, sem você precisar montar do zero.</p>' +
-        '<div class="escolha-rapida" role="note">' +
-          '<p><span>📊</span><span><strong>Quer uma planilha?</strong> Escolha a de <strong>R$17</strong>. É um arquivo do Google Planilhas.</span></p>' +
-          '<p><span>📱</span><span><strong>Prefere um aplicativo no celular?</strong> Escolha o Tino, <strong>R$27</strong>. Não é planilha: no Android você baixa no Google Play e no iPhone instala pelo navegador.</span></p>' +
-        '</div>' +
+        '<p class="offer-lead">A <strong>Planilha de Organização Financeira</strong> é uma planilha pronta no Google Planilhas para registrar o que entra e o que sai e acompanhar o seu mês em um só lugar. É a estrutura que as ações acima pedem, sem você precisar montar do zero.</p>' +
 
         '<figure class="demo-video">' +
           '<video controls playsinline preload="metadata" poster="assets/video/tutorial-poster.jpg" width="900" height="434">' +
@@ -446,71 +402,11 @@
           '</ul>' +
         '</div>' +
 
-        /* Por que o app combina com o que a pessoa respondeu */
-        recomendacaoApp(state.answers) +
-
-        '<div class="app-live app-live--quiz" data-app-live="quiz-resultado">' +
-          '<span class="reco-tag">📱 Experimente agora, sem cadastro</span>' +
-          '<div class="phone">' +
-            '<img class="phone-poster" src="assets/app/app-resumo-v2.jpg" alt="Tela inicial do app com o quanto você pode gastar hoje" width="600" height="1298" loading="lazy">' +
-            '<button class="phone-play" type="button">▶ Toque para experimentar</button>' +
-          '</div>' +
-          '<p class="app-live-note">É o app de verdade, com dados de exemplo. Toque, navegue e lance um gasto.</p>' +
-        '</div>' +
-
         depoimentosHTML() +
 
-        /* Comparação rápida: o app faz tudo da planilha e mais. */
-        '<div class="compare-card">' +
-          '<h3 class="compare-title">Planilha ou app? Veja a diferença</h3>' +
-          '<table class="compare">' +
-            '<thead><tr><th></th><th>Planilha</th><th class="col-app">App ⭐</th></tr></thead>' +
-            '<tbody>' +
-              compareRow('Entradas, gastos, contas e metas', '✓', '✓') +
-              compareRow('“Restante para gastar” e gráficos', '✓', '✓') +
-              compareRow('Lançar em segundos no celular, até falando', '—', '✓') +
-              compareRow('Faturas do cartão e parcelas automáticas', '—', '✓') +
-              compareRow('Cofrinhos, orçamentos e dicas do mês', 'Metas', '✓') +
-              compareRow('Lembretes de contas no celular', '—', '✓') +
-              compareRow('Funciona sem internet', '—', '✓') +
-              compareRow('Acesso vitalício, sem mensalidade', '✓', '✓') +
-              compareRow('Preço (pagamento único)', 'R$17', 'R$27') +
-            '</tbody>' +
-          '</table>' +
-        '</div>' +
-
-        /* Oferta 1 (destaque): o app no celular, R$27 */
-        '<p class="dep-destaque">“Já tentei várias planilhas, e nenhuma foi tão prática como este app.”<span>Jailson, usa o app Tino</span></p>' +
-        '<div class="offer-card offer-card--app">' +
-          '<span class="offer-badge">⭐ Mais vantajoso</span>' +
-          '<span class="offer-title">📱 Tino Finanças · app no celular</span>' +
-          '<p class="offer-sub"><strong>Um aplicativo para o celular, não é planilha.</strong> Faz tudo o que a planilha faz, com as contas feitas sozinhas.</p>' +
-          '<div class="offer-price-row">' +
-            '<span class="offer-price-new">R$27</span>' +
-            '<span class="offer-price-meta">pagamento único</span>' +
-          '</div>' +
-          '<span class="offer-diff">🎁 A planilha vem de brinde</span>' +
-          '<ul class="offer-includes">' +
-            '<li class="offer-destaque">' + checkIcon() + ' <span><strong>Acesso vitalício, sem mensalidade:</strong> paga uma vez e usa para sempre, com todas as atualizações</span></li>' +
-            '<li class="offer-brinde">🎁 <span><strong>Brinde: a Planilha de Organização Financeira</strong> (vendida separada por R$17), para usar no computador ou imprimir</span></li>' +
-            '<li>' + checkIcon() + ' App para iPhone e Android: instala na tela inicial e funciona até sem internet</li>' +
-            '<li>' + checkIcon() + ' No Android, baixe o Tino no Google Play e entre com o e-mail da compra, sem pagar mais nada. No iPhone, instala pelo navegador</li>' +
-            '<li>' + checkIcon() + ' Lança um gasto em segundos, até falando: “gastei 45 no ifood no crédito”</li>' +
-            '<li>' + checkIcon() + ' Faturas do cartão e parcelas calculadas sozinhas</li>' +
-            '<li>' + checkIcon() + ' Cofrinhos com prazo, orçamentos e dicas do mês</li>' +
-            '<li>' + checkIcon() + ' Lembretes das contas a vencer no celular</li>' +
-            '<li>' + checkIcon() + ' <span>Suporte por e-mail e WhatsApp<br><a class="offer-link" href="mailto:suporteplanilhass@gmail.com">suporteplanilhass@gmail.com</a></span></li>' +
-          '</ul>' +
-          '<div class="guarantee-strip">🛡️ Garantia incondicional de 7 dias: não gostou por qualquer motivo, é só pedir o reembolso</div>' +
-          '<button class="btn btn-gold btn-large btn-pulse-gold" id="appBuyBtn" type="button">Quero o app por R$27' + arrowIcon() + '</button>' +
-          '<button class="offer-demo" id="appDemoBtn" type="button">👀 Experimentar o app grátis antes</button>' +
-          '<p class="offer-aviso">Queria uma planilha? Escolha a opção de R$17 logo abaixo.</p>' +
-        '</div>' +
-
-        /* Oferta 2: a planilha, R$17 */
+        /* Oferta: a planilha, R$17 */
         '<div class="offer-card offer-card--planilha">' +
           '<span class="offer-title">📊 Planilha de Organização Financeira</span>' +
-          '<p class="offer-sub"><strong>Um arquivo do Google Planilhas, não é aplicativo.</strong> Para quem prefere usar no computador.</p>' +
           '<div class="offer-price-row">' +
             '<span class="offer-price-new">R$17</span>' +
             '<span class="offer-price-meta">pagamento único</span>' +
@@ -522,7 +418,7 @@
             '<li>' + checkIcon() + ' <span>Suporte por e-mail e WhatsApp<br><a class="offer-link" href="mailto:suporteplanilhass@gmail.com">suporteplanilhass@gmail.com</a></span></li>' +
           '</ul>' +
           '<div class="guarantee-strip">🛡️ Garantia incondicional de 7 dias: não gostou por qualquer motivo, é só pedir o reembolso</div>' +
-          '<button class="btn btn-outline btn-large" id="finalCtaBtn" type="button">Quero a planilha por R$17</button>' +
+          '<button class="btn btn-primary btn-large btn-pulse" id="finalCtaBtn" type="button">Quero minha planilha por R$17' + arrowIcon() + '</button>' +
         '</div>' +
 
         '<p class="final-cta-note offer-note">Acesso imediato após a confirmação do pagamento. Pix ou cartão de crédito.</p>' +
@@ -535,16 +431,9 @@
     document.getElementById('finalCtaBtn').addEventListener('click', function () {
       Funnel.goToCheckout();
     });
-    document.getElementById('appDemoBtn').addEventListener('click', function () {
-      Funnel.openAppDemo({ cta_position: 'quiz-resultado' });
-    });
-    var appBuy = document.getElementById('appBuyBtn');
-    if (!Funnel.isOfferReady('app')) { appBuy.disabled = true; appBuy.title = 'Em breve'; }
-    else appBuy.addEventListener('click', function () { Funnel.goToCheckout('app', { cta_position: 'quiz-resultado' }); });
     document.getElementById('restartBtnResult').addEventListener('click', restart);
-    Funnel.ativarAppAoVivo(resultWrap);
-    /* Barra fixa do app no celular: depois do título do resultado, sumindo nos cards de oferta */
-    Funnel.barraFixa({ depoisDe: '.perfil-card', esconderEm: ['.offer-card--app', '.offer-card--planilha'] });
+    /* Barra fixa de compra da planilha no celular: depois do título do resultado, sumindo no card da oferta */
+    Funnel.barraFixa({ depoisDe: '.perfil-card', esconderEm: ['.offer-card--planilha'] });
 
     var demoVideo = resultWrap.querySelector('.demo-video video');
     if (demoVideo) {

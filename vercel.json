@@ -10,12 +10,6 @@
       ]
     }
   ],
-  "rewrites": [
-    {
-      "source": "/app",
-      "destination": "/app.html"
-    }
-  ],
   "redirects": [
     {
       "source": "/",
@@ -25,7 +19,17 @@
           "value": "(www\\.)?tinofinancas\\.com\\.br"
         }
       ],
-      "destination": "/app",
+      "destination": "/vendas.html",
+      "permanent": false
+    },
+    {
+      "source": "/app",
+      "destination": "/vendas.html",
+      "permanent": false
+    },
+    {
+      "source": "/app.html",
+      "destination": "/vendas.html",
       "permanent": false
     }
   ]
